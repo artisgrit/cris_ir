@@ -1,0 +1,43 @@
+
+> dspace-angular@2025.02.00 build
+> ng build --configuration development
+
+- Generating browser application bundles (phase: setup)...
+Γ£ö Browser application bundle generation complete.
+Γ£ö Browser application bundle generation complete.
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\node_modules\@swimlane\ngx-charts\fesm2020\swimlane-ngx-charts.mjs depends on 'rfdc'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\node_modules\canvg\lib\index.es.js depends on 'raf'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\node_modules\canvg\lib\index.es.js depends on 'rgbcolor'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\src\app\shared\cookies\browser-orejime.service.ts depends on 'orejime/dist/orejime'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\src\app\shared\geospatial-map\geospatial-map.component.ts depends on 'leaflet'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\src\app\shared\geospatial-map\geospatial-map.component.ts depends on 'leaflet-providers'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\src\app\shared\geospatial-map\geospatial-map.component.ts depends on 'leaflet.markercluster'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+Warning: C:\Users\UCU-LIBRARY\Desktop\Institutional Repository UIUX\v1\src\app\system-wide-alert\alert-banner\system-wide-alert-banner.component.ts depends on 'date-fns-tz'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.dev/tools/cli/build#configuring-commonjs-dependencies
+
+
+
+./src/app/header/header.component.scss?ngResource - Error: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):
+SassError: expected "}".
+    Γò╖
+237 Γöé   }
+    Γöé    ^
+    Γò╡
+  src\app\header\header.component.scss 237:4  root stylesheet
+
+

@@ -1,0 +1,55 @@
+<div class="header-topbar" aria-label="Social links">
+  <div class="container">
+    <div class="topbar-content">
+      <a class="topbar-icon" href="https://www.facebook.com/UCULibrary/" target="_blank" rel="noopener" aria-label="Facebook">
+        <span class="fa-brands fa-facebook-f" aria-hidden="true"></span>
+      </a>
+      <a class="topbar-icon" href="https://x.com/UcuLibrary" target="_blank" rel="noopener" aria-label="X">
+        <span class="fa-brands fa-x-twitter" aria-hidden="true"></span>
+      </a>
+      <a class="topbar-icon" href="https://www.youtube.com/@HamumukasaLibrary" target="_blank" rel="noopener" aria-label="YouTube">
+        <span class="fa-brands fa-youtube" aria-hidden="true"></span>
+      </a>
+      <a class="topbar-icon" href="https://www.linkedin.com/in/uganda-christian-university-a-centre-of-excellence-in-the-heart-of-africa-53797118a/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <span class="fa-brands fa-linkedin-in" aria-hidden="true"></span>
+      </a>
+      <a class="topbar-icon" href="https://t.me/uculib" target="_blank" rel="noopener" aria-label="Telegram">
+        <span class="fa-brands fa-telegram" aria-hidden="true"></span>
+      </a>
+      <a class="topbar-icon" href="https://ucu.ac.ug" target="_blank" rel="noopener" aria-label="Website">
+        <span class="fa-solid fa-globe" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="container">
+    <div class="header-main">
+      <a class="navbar-brand my-2" routerLink="/home" role="button" tabindex="0">
+        <img src="assets/images/ucu-logo.svg" alt="Uganda Christian University Logo"/>
+      </a>
+
+      <ds-navbar class="header-site-nav"></ds-navbar>
+
+      <div class="navbar navbar-light navbar-expand-md flex-shrink-0 px-0">
+        <ds-search-navbar></ds-search-navbar>
+        <div role="toolbar" [attr.aria-label]="'nav.user.description' | translate">
+          <ds-lang-switch></ds-lang-switch>
+          <ds-context-help-toggle></ds-context-help-toggle>
+          <ds-auth-nav-menu></ds-auth-nav-menu>
+          <ds-impersonate-navbar></ds-impersonate-navbar>
+        </div>
+        @if (isMobile$ | async) {
+          <div class="ps-2">
+            <button class="navbar-toggler px-0" type="button" (click)="toggleNavbar()"
+              aria-controls="collapsingNav"
+              aria-expanded="false" [attr.aria-label]="'nav.toggle' | translate">
+              <span class="fas fa-bars fa-fw toggler-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</header>

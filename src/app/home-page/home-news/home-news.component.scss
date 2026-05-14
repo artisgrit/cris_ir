@@ -1,0 +1,51 @@
+:host {
+    display: block;
+}
+
+.display-3 {
+    word-break: break-word;
+}
+
+.home-news-content {
+  background-color: var(--ds-home-news-background-color);
+}
+
+a {
+  color: var(--ds-home-news-link-color);
+
+  &:hover {
+    color: var(--ds-home-news-link-hover-color);
+  }
+}
+
+/* Reduce hero height for themes using background image hero */
+:host ::ng-deep {
+  div.background-image-container {
+    min-height: 200px;
+
+    .container {
+      min-height: 200px;
+    }
+
+    .home-news-content {
+      padding: 1.5rem 0 !important;
+    }
+  }
+}
+
+/* Reduce default (non-theme) hero vertical size */
+:host {
+  .home-news-content {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .bg-light.p-5 {
+    padding: 1.5rem !important;
+  }
+
+  .container-fluid.py-5 {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+}

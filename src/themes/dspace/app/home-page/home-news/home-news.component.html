@@ -1,0 +1,47 @@
+<div class="background-image-container mt-ncs">
+  <div class="container hero-flex-container">
+    <div class="home-news-content py-4 px-2 py-sm-5 px-sm-0 mt-0 mb-4">
+      @if (hasHomeNewsMetadata) {
+        <ds-text-section [sectionId]="'site'"
+                         [textRowSection]="homeNewsSection"
+                         [site]="(site$ | async)"></ds-text-section>
+      } @else {
+        <div class="d-flex flex-wrap">
+          <div>
+            <h1 class="display-3">Uganda Christian University Digital Institutional Repository</h1>
+            <p class="lead">Institutional Repository: <b>A Centre of Excellence in the Heart of Africa</b></p>
+          </div>
+        </div>
+        <p>Welcome to Uganda Christian University's Digital Institutional Repository. Our repository is dedicated to preserving and providing
+          access to the scholarly, educational and cultural output of UCU. This platform showcases the intellectual contributions
+          of our faculty, researchers, and students.
+        </p>
+        <p>
+          The UCU Institutional Repository supports our commitment to:
+        </p>
+
+        <ul>
+          <li>Promote open access to scholarly research and knowledge
+          </li>
+          <li>Preserve the intellectual heritage of Uganda Christian University
+          </li>
+          <li>Enhance the visibility and impact of UCU research globally
+          </li>
+          <li>Support academic collaboration and knowledge sharing across disciplines
+          </li>
+          <li>Ensure long-term preservation of digital scholarly materials</li>
+        </ul>
+        <p>Explore our collections and discover the innovative research and scholarship emerging from
+          <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.</p>
+      }
+    </div>
+
+    <!-- Guides tabs (How to Deposit / Data Reuse / Governance) embedded inside the hero
+         so they appear on the dark-blue background alongside the news content. -->
+    <ds-themed-home-infographics class="hero-guides"></ds-themed-home-infographics>
+  </div>
+  <picture class="background-image">
+    <img alt="" [src]="'assets/images/background.jpg'"/>
+  </picture>
+  <small class="credits">Uganda Christian University</small>
+</div>

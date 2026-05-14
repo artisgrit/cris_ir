@@ -1,0 +1,37 @@
+.truncatable-content {
+  flex: 1 1 90%;
+  display: flex;
+  justify-content: left;
+}
+
+.item-list-supervision {
+    a {
+        cursor: pointer;
+    }
+}
+
+.word-break {
+  word-break: break-word;
+}
+
+.item-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.item-pdf-preview-btn {
+  border: 0;
+  background: transparent;
+  color: #d7014d;
+  padding: 0.1rem 0.2rem;
+  border-radius: 8px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(215, 1, 77, 0.08);
+    outline: none;
+  }
+}

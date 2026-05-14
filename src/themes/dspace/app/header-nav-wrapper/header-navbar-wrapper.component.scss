@@ -1,0 +1,88 @@
+:host {
+  --ds-header-navbar-border-bottom-style: solid var(--ds-header-navbar-border-bottom-height) rgba(255, 255, 255, 0.2);
+
+  div#header-navbar-wrapper {
+    position: relative;
+    border-bottom: var(--ds-header-navbar-border-bottom-style);
+  }
+
+  ::ng-deep {
+    .ds-menu-item, .ds-menu-toggler-wrapper {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .header-nav-dropdown-menu {
+      #main-site-navigation {
+        display: flex;
+        align-items: stretch;
+        height: auto !important;
+        gap: 0;
+      }
+
+      .ds-menu-item-wrapper,
+      .ds-menu-item,
+      .ds-menu-toggler-wrapper {
+        display: flex;
+        align-items: center;
+        height: auto;
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .ds-menu-item {
+        width: 100%;
+        padding: 0.6rem 0.75rem;
+        border-radius: 10px;
+        color: #0B3D91 !important;
+        font-size: 0.95rem;
+
+        &:hover,
+        &:focus {
+          color: #ffffff !important;
+          background: #0B3D91;
+        }
+      }
+
+      .dropdown-menu {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(11, 61, 145, 0.1);
+        box-shadow: 0 8px 24px rgba(11, 61, 145, 0.15);
+        z-index: 1030;
+
+        .ds-menu-item {
+          padding: 0.55rem 0.75rem;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+/* Ensure desktop navbar never gets forced vertical by dropdown menu styles */
+@include media-breakpoint-up(md) {
+  :host ::ng-deep {
+    .header-nav-dropdown-menu {
+      #main-site-navigation {
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .ds-menu-item {
+        width: auto;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  :host ::ng-deep {
+    .header-nav-dropdown-menu {
+      #main-site-navigation {
+        flex-direction: column;
+      }
+    }
+  }
+}

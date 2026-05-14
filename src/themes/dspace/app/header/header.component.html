@@ -1,0 +1,149 @@
+<div class="header-topbar" aria-label="Quick links and social links">
+  <div class="container-fluid px-3">
+    <div class="topbar-content">
+      <nav class="topbar-links d-none d-md-flex" aria-label="Quick links">
+        <a class="topbar-link" href="https://proxy.library.ucu.ac.ug/programs" target="_blank" rel="noopener">
+          <span class="fa-solid fa-list" aria-hidden="true"></span>
+          <span>List of All Programmes</span>
+        </a>
+        <a class="topbar-link" href="https://mailx.ucu.ac.ug" target="_blank" rel="noopener">
+          <span class="fa-solid fa-envelope" aria-hidden="true"></span>
+          <span>Webmail</span>
+        </a>
+        <a class="topbar-link" href="https://students.ucu.ac.ug" target="_blank" rel="noopener">
+          <span class="fa-solid fa-inbox" aria-hidden="true"></span>
+          <span>Students Mail</span>
+        </a>
+        <a class="topbar-link" href="https://alpha.ucu.ac.ug" target="_blank" rel="noopener">
+          <span class="fa-solid fa-a" aria-hidden="true"></span>
+          <span>Alpha</span>
+        </a>
+        <a class="topbar-link" href="https://alpha.ucu.ac.ug/careers" target="_blank" rel="noopener">
+          <span class="fa-solid fa-briefcase" aria-hidden="true"></span>
+          <span>Careers</span>
+        </a>
+
+        <div ngbDropdown class="topbar-link-dropdown">
+          <button class="topbar-link dropdown-toggle" type="button" ngbDropdownToggle aria-label="E-Learning quick links">
+            <span class="fa-solid fa-graduation-cap" aria-hidden="true"></span>
+            <span>e-Learning</span>
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="https://elearning.ucu.ac.ug" target="_blank" rel="noopener">e-Learning Portal</a>
+            <a class="dropdown-item" href="https://moodle.ucu.ac.ug" target="_blank" rel="noopener">UCU eLearning Platform (Moodle)</a>
+          </div>
+        </div>
+
+        <a class="topbar-link" href="https://uis.ucu.ac.ug" target="_blank" rel="noopener">
+          <span class="fa-solid fa-building-columns" aria-hidden="true"></span>
+          <span>UIS</span>
+        </a>
+
+        <div ngbDropdown class="topbar-link-dropdown">
+          <button class="topbar-link dropdown-toggle" type="button" ngbDropdownToggle aria-label="Research at UCU quick links">
+            <span class="fa-solid fa-flask" aria-hidden="true"></span>
+            <span>Research at UCU</span>
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="https://ucudir.ucu.ac.ug" target="_blank" rel="noopener">Institutional Repository</a>
+          </div>
+        </div>
+      </nav>
+
+      <div ngbDropdown class="d-inline-flex d-md-none topbar-quicklinks-dropdown" placement="bottom-start" container="body" autoClose="outside">
+        <button class="btn btn-sm btn-light topbar-quicklinks-toggle" type="button" ngbDropdownToggle aria-label="Open quick links">
+          <span class="fa-solid fa-link" aria-hidden="true"></span>
+          <span class="ms-1">Quick links</span>
+        </button>
+        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-start topbar-quicklinks-menu">
+          <a class="dropdown-item" href="https://proxy.library.ucu.ac.ug/programs" target="_blank" rel="noopener">List of All Programmes</a>
+          <a class="dropdown-item" href="https://mailx.ucu.ac.ug" target="_blank" rel="noopener">Webmail</a>
+          <a class="dropdown-item" href="https://students.ucu.ac.ug" target="_blank" rel="noopener">Students Mail</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://alpha.ucu.ac.ug" target="_blank" rel="noopener">Alpha</a>
+          <a class="dropdown-item" href="https://alpha.ucu.ac.ug/careers" target="_blank" rel="noopener">Careers</a>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">e-Learning</div>
+          <a class="dropdown-item" href="https://elearning.ucu.ac.ug" target="_blank" rel="noopener">e-Learning Portal</a>
+          <a class="dropdown-item" href="https://moodle.ucu.ac.ug" target="_blank" rel="noopener">UCU eLearning Platform (Moodle)</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://uis.ucu.ac.ug" target="_blank" rel="noopener">UIS</a>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-header">Research at UCU</div>
+          <a class="dropdown-item" href="https://ucudir.ucu.ac.ug" target="_blank" rel="noopener">Institutional Repository</a>
+        </div>
+      </div>
+
+      <div class="topbar-icons" aria-label="Social links">
+        <a class="topbar-icon d-none d-sm-inline-flex" href="https://www.facebook.com/UCULibrary/" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="fa-brands fa-facebook-f" aria-hidden="true"></span>
+        </a>
+        <a class="topbar-icon d-none d-sm-inline-flex" href="https://x.com/UcuLibrary" target="_blank" rel="noopener" aria-label="X">
+          <span class="fa-brands fa-x-twitter" aria-hidden="true"></span>
+        </a>
+        <a class="topbar-icon d-none d-sm-inline-flex" href="https://www.youtube.com/@HamumukasaLibrary" target="_blank" rel="noopener" aria-label="YouTube">
+          <span class="fa-brands fa-youtube" aria-hidden="true"></span>
+        </a>
+        <a class="topbar-icon d-none d-sm-inline-flex" href="https://www.linkedin.com/in/uganda-christian-university-a-centre-of-excellence-in-the-heart-of-africa-53797118a/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <span class="fa-brands fa-linkedin-in" aria-hidden="true"></span>
+        </a>
+        <a class="topbar-icon d-none d-sm-inline-flex" href="https://t.me/uculib" target="_blank" rel="noopener" aria-label="Telegram">
+          <span class="fa-brands fa-telegram" aria-hidden="true"></span>
+        </a>
+        <a class="topbar-icon" href="https://ucu.ac.ug" target="_blank" rel="noopener" aria-label="UCU main website">
+          <span class="fa-solid fa-globe" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header id="main-site-header">
+  <div class="container-fluid h-100 d-flex flex-row align-items-center justify-content-between gapx-2 gapy-2 px-3" id="main-site-header-container">
+    <div id="header-left"
+      class="h-100 d-flex flex-row flex-nowrap justify-content-start align-items-center">
+      <a class="d-block my-2 my-md-0" routerLink="/home" [attr.aria-label]="'home.title' | translate" role="button" tabindex="0">
+        <img id="header-logo" src="assets/images/ucu-logo.png" alt="Uganda Christian University Logo" title="Uganda Christian University Institutional Repository"/>
+      </a>
+    </div>
+
+    <!-- Desktop / large screens: spread the navbar horizontally after the logo -->
+    <div id="header-center" class="d-none d-md-flex flex-grow-1 align-items-center ms-3 min-w-0">
+      <ds-navbar></ds-navbar>
+    </div>
+
+    <div id="header-right" class="h-100 d-flex flex-row flex-nowrap flex-shrink-0 justify-content-end align-items-center ms-auto">
+      <div class="header-search me-2">
+        <ds-search-navbar></ds-search-navbar>
+      </div>
+
+      <!-- Mobile / small screens: hamburger menu -->
+      <div ngbDropdown #navMenu="ngbDropdown" class="d-inline-flex d-md-none align-items-center header-nav-dropdown" placement="bottom-end" container="body" autoClose="inside">
+        <button id="header-menu-toggle" class="btn btn-transparent" type="button"
+          ngbDropdownToggle
+          [attr.aria-label]="'nav.toggle' | translate"
+          [attr.aria-expanded]="navMenu.isOpen()">
+          <span class="fas fa-bars fa-fw fa-xl toggler-icon" aria-hidden="true"></span>
+        </button>
+
+        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end p-0 header-nav-dropdown-menu" aria-labelledby="header-menu-toggle">
+          <div class="p-3 border-bottom header-nav-controls">
+            <div role="toolbar" class="d-flex flex-row flex-wrap align-items-center justify-content-end gapx-1 mt-2" [attr.aria-label]="'nav.user.description' | translate">
+              <ds-lang-switch></ds-lang-switch>
+              <ds-context-help-toggle></ds-context-help-toggle>
+              <ds-impersonate-navbar></ds-impersonate-navbar>
+            </div>
+          </div>
+
+          <nav class="p-3 header-nav-menu" [attr.aria-label]="'nav.main.description' | translate">
+            <ds-navbar></ds-navbar>
+          </nav>
+        </div>
+      </div>
+
+      <div class="header-auth ms-2">
+        <ds-auth-nav-menu></ds-auth-nav-menu>
+      </div>
+    </div>
+  </div>
+</header>

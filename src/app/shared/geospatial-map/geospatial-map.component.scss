@@ -1,0 +1,119 @@
+.map-container {
+  //position: absolute;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  height: 400px;
+  width: 100%;
+  max-width: 400px;
+
+  @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+    max-width: 450px;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, md)) {
+    max-width: 500px;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, lg)) {
+    max-width: 600px;
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, xl)) {
+    max-width: 700px;
+  }
+}
+
+.map-container img {
+  max-height: none;
+}
+
+.map-frame {
+  border: 2px solid #0b3d91;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* browse */
+.browse-map-container {
+  height: 800px;
+  width: 100%;
+  max-height: none;
+}
+
+.browse-map-frame {
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+}
+
+.map {
+  height: 100%;
+  width: auto;
+}
+
+.geospatial-map {
+  height: 100%;
+  width: 100%;
+}
+
+:host ::ng-deep {
+  .marker-cluster-small,
+  .marker-cluster-medium,
+  .marker-cluster-large {
+    background-color: rgba(11, 61, 145, 0.35);
+  }
+
+  .marker-cluster-small div,
+  .marker-cluster-medium div,
+  .marker-cluster-large div {
+    background-color: #0b3d91;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .marker-cluster-small:hover,
+  .marker-cluster-medium:hover,
+  .marker-cluster-large:hover {
+    background-color: rgba(215, 1, 77, 0.35);
+  }
+
+  .marker-cluster-small:hover div,
+  .marker-cluster-medium:hover div,
+  .marker-cluster-large:hover div {
+    background-color: #d7014d;
+    color: #ffd932;
+  }
+
+  .leaflet-control-zoom a:hover,
+  .leaflet-control-zoom a:focus {
+    background-color: #ffd932;
+    color: #0b3d91;
+  }
+
+  .leaflet-control-zoom a {
+    background-color: #0b3d91;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .leaflet-bar a:hover,
+  .leaflet-bar a:focus-visible {
+    background-color: #ffd932;
+    color: #0b3d91;
+  }
+
+  .latlng-control {
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0b3d91;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(11, 61, 145, 0.25);
+  }
+}

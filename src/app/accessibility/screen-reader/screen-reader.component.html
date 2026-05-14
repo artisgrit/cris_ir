@@ -1,0 +1,100 @@
+<div class="screen-reader-container" *ngIf="isSupported && isEnabled">
+  <button
+    class="screen-reader-button"
+    [class.active]="isSpeaking || isPaused"
+    (click)="toggleScreenReader()"
+    aria-label="Toggle screen reader"
+    title="Click to enable/disable screen reader for page content"
+    type="button">
+    <span class="screen-reader-icon">
+      <i class="fas fa-volume-up"></i>
+    </span>
+  </button>
+
+  <div class="screen-reader-tooltip" *ngIf="isSpeaking || isPaused">
+    <span class="tooltip-text">Screen Reader Active</span>
+  </div>
+
+  <div class="screen-reader-controls" *ngIf="isSpeaking || isPaused" role="region" aria-label="Screen reader controls">
+    <button
+      class="control-btn settings-btn"
+      (click)="toggleSettings()"
+      aria-label="Screen reader settings"
+      title="Settings"
+      type="button">
+      <i class="fas fa-sliders-h"></i>
+    </button>
+    <button
+      class="control-btn pause-btn"
+      (click)="pauseReading()"
+      aria-label="Pause screen reader"
+      title="Pause reading"
+      type="button">
+      <i class="fas fa-pause"></i>
+    </button>
+    <button
+      class="control-btn resume-btn"
+      (click)="resumeReading()"
+      aria-label="Resume screen reader"
+      title="Resume reading"
+      type="button">
+      <i class="fas fa-play"></i>
+    </button>
+    <button
+      class="control-btn stop-btn"
+      (click)="stopReading()"
+      aria-label="Stop screen reader"
+      title="Stop reading"
+      type="button">
+      <i class="fas fa-stop"></i>
+    </button>
+  </div>
+
+  <div class="screen-reader-settings" *ngIf="(isSpeaking || isPaused) && showSettings" role="region" aria-label="Screen reader settings panel">
+    <div class="setting-row">
+      <label class="setting-label" for="screen-reader-rate">Pace</label>
+      <input
+        id="screen-reader-rate"
+        class="setting-input"
+        type="range"
+        min="0.5"
+        max="2"
+        step="0.1"
+        [value]="speechRate"
+        (input)="onRateChange(($any($event.target).valueAsNumber))"
+        aria-label="Reading pace" />
+      <span class="setting-value">{{ speechRate | number:'1.1-1' }}</span>
+    </div>
+
+    <div class="setting-row">
+      <label class="setting-label" for="screen-reader-language">Language</label>
+      <select
+        id="screen-reader-language"
+        class="setting-select"
+        [value]="speechLanguage"
+        (change)="onLanguageChange($any($event.target).value)"
+        aria-label="Speech language">
+        <option value="en-US">English (US)</option>
+        <option value="en-GB">English (UK)</option>
+        <option value="sw-KE">Swahili</option>
+        <option value="fr-FR">Français</option>
+        <option value="ar-SA">العربية</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <label class="setting-label" for="screen-reader-voice">Voice</label>
+      <select
+        id="screen-reader-voice"
+        class="setting-select"
+        [value]="speechVoiceURI || ''"
+        (change)="onVoiceChange($any($event.target).value)"
+        aria-label="Speech voice">
+        <option value="" *ngIf="voices.length === 0">Default</option>
+        <option *ngFor="let v of voices; trackBy: trackVoice" [value]="v.voiceURI">
+          {{ v.name }} ({{ v.lang }})
+        </option>
+      </select>
+    </div>
+  </div>
+</div>

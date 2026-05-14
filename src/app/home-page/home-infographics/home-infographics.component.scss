@@ -1,0 +1,67 @@
+.home-guides {
+  margin: 1.25rem 0 2.5rem;
+}
+
+.home-guides__tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-guides__tab {
+  border: 1px solid #111;
+  background: #f5f5f5;
+  color: #111;
+  border-radius: 0;
+  padding: 0.25rem 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: #fff;
+  }
+
+  &.is-active {
+    background: #fff;
+    border-bottom-color: #fff;
+  }
+}
+
+.home-guides__panel {
+  max-width: 920px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #111;
+  border-radius: 0;
+  padding: 1.5rem 1.75rem;
+  margin-top: -1px;
+}
+
+.home-guides__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #1e1e1e;
+}
+
+.home-guides__description {
+  margin: 0 0 1rem;
+  color: #4f4f4f;
+  line-height: 1.6;
+}
+
+.home-guides__link {
+  color: #0b3d91;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,145 @@
+<div class="deposit-content">
+  <h1>How to Deposit</h1>
+
+  <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs deposit-tabs">
+    <li [ngbNavItem]="'overview'">
+      <button ngbNavLink class="tab-title">Overview</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <h2>What can be deposited into the Repository?</h2>
+          <p>The Repository terms of use determine the types of content that can be deposited into Veritus eCommons.</p>
+
+          <h3>Research Output Eligibility</h3>
+          <p>Only Research Outputs connected to Uganda Christian University can be deposited in the Repository. By "connected" we mean:</p>
+          <ul>
+            <li>Research Outputs authored by current or former UCU researchers, research students or staff members</li>
+            <li>Outputs of research conducted at Uganda Christian University</li>
+            <li>Research Outputs that appear in a journal published, or a conference hosted, by the University</li>
+            <li>Outputs resulting from research undertaken using University facilities</li>
+          </ul>
+
+          <h3>Before Depositing</h3>
+          <p>Regardless of the output type, we ask you to check that:</p>
+          <ul>
+            <li>You have the right to deposit the material</li>
+            <li>The material is available in suitable electronic format(s)</li>
+          </ul>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="'publications'">
+      <button ngbNavLink class="tab-title">Publications & Outputs</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <h2>Open Access and Scholarly Outputs</h2>
+          <p>A mediated deposit service is available for your scholarly publications and research outputs.</p>
+
+          <h3>How to Submit</h3>
+          <p>Please use the Open Access upload form to register your article details. Our team will review your submission and add it to the repository on your behalf.</p>
+
+          <div class="deposit-info-box">
+            <h4>Open Access Upload Form</h4>
+            <p>Submit your publications through our dedicated form to ensure all required metadata is captured.</p>
+            <a class="btn btn-primary ucu-btn" [routerLink]="['/submit']">Start a submission</a>
+          </div>
+
+          <h3>Other Content</h3>
+          <p>If you have other content you would like the team to add on your behalf, please email <strong>support@repository.ucu.ac.ug</strong> with details of the items in question.</p>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="'data'">
+      <button ngbNavLink class="tab-title">Research Data</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <h2>Research Data Deposit</h2>
+          <p>A mediated deposit service is available for research data - please use the Data upload form.</p>
+
+          <div class="deposit-info-box">
+            <h4>Data Upload Form</h4>
+            <p>Submit your research datasets through our dedicated form for structured metadata collection.</p>
+            <a class="btn btn-primary ucu-btn" [routerLink]="['/submit']">Start a submission</a>
+          </div>
+
+          <h3>Support</h3>
+          <p>If you have any questions about depositing data, please contact the Research Data Management team at <strong>info@data.ucu.ac.ug</strong>.</p>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="'theses'">
+      <button ngbNavLink class="tab-title">Theses</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <h2>Deposit Your Thesis</h2>
+          <p>A mediated deposit service is available for theses and dissertations.</p>
+
+          <div class="deposit-info-box">
+            <h4>Preparing to Deposit</h4>
+            <p>Please access the Theses information page where further preparation details are provided.</p>
+            <a class="btn btn-primary ucu-btn" [routerLink]="['/search']" [queryParams]="{query: 'thesis'}">Browse theses</a>
+          </div>
+
+          <h3>Contact Information</h3>
+          <p>If you have any questions, please contact the Repository support team at <strong>support@repository.ucu.ac.ug</strong>.</p>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="'batch'">
+      <button ngbNavLink class="tab-title">Batch Upload</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <h2>Batch Upload Service</h2>
+          <p>For complex or extensive material, we offer a batch upload service.</p>
+
+          <h3>What You Need</h3>
+          <p>For a batch upload, we require:</p>
+          <ol>
+            <li><strong>A spreadsheet</strong> containing metadata describing the items for upload. We will supply a template spreadsheet with the required format and fields.</li>
+            <li><strong>The files themselves</strong> in appropriate electronic formats.</li>
+          </ol>
+
+          <h3>Process</h3>
+          <p>Once we receive the spreadsheet and files, our team will upload the material to the repository on your behalf and report back once Digital Object Identifiers (DOIs) have been created.</p>
+
+          <h3>Get Started</h3>
+          <p>To obtain further advice and to get a copy of the template spreadsheet, please contact:</p>
+
+          <div class="contact-section">
+            <p><strong>Research Data:</strong> Research Data Management team - <strong>info@data.ucu.ac.ug</strong></p>
+            <p><strong>Other Materials:</strong> Repository service - <strong>support@repository.ucu.ac.ug</strong></p>
+            <p>If you're unsure which applies, contact the Repository team and they'll route your enquiry appropriately.</p>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="'selfarchive'">
+      <button ngbNavLink class="tab-title">Self-Archiving</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <h2>Self-Archiving Your Material</h2>
+          <p>In some instances, you may be allowed to self-archive your material on the repository.</p>
+
+          <h3>How to Request Access</h3>
+          <p>Please contact <strong>support@repository.ucu.ac.ug</strong> with details of which collection(s) you wish to submit your material to.</p>
+
+          <h3>Approval Process</h3>
+          <p>Once the team has verified your access rights to deposit in that collection, they will send you an email letting you know that you can deposit your material.</p>
+
+          <h3>New Communities or Collections</h3>
+          <p>If you would like a new community and/or collection to be created, please email the Repository team with:</p>
+          <ul>
+            <li>The name of the organisational entity (such as Department or Institution)</li>
+            <li>A description of which types of content the community/collection will contain (e.g., research publications, working papers, images)</li>
+          </ul>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div class="ucu-tab-panel" [ngbNavOutlet]="nav"></div>
+</div>

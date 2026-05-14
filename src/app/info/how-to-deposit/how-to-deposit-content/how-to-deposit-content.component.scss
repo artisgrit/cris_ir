@@ -1,0 +1,142 @@
+.deposit-content {
+  padding: 2rem 0;
+
+  h1 {
+    margin-bottom: 2rem;
+    color: #0b3d91;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 2.5rem;
+  }
+
+  .deposit-tabs {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e0e0e0;
+
+    .nav-link {
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: #0b3d91;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-weight: 500;
+      padding: 1rem 1.5rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #d7014d;
+        border-bottom-color: #ffd932;
+      }
+
+      &.active {
+        color: #d7014d;
+        border-bottom-color: #d7014d;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .tab-content-wrapper {
+    padding: 2rem 0;
+    animation: fadeIn 0.3s ease-in;
+
+    h2 {
+      color: #0b3d91;
+      font-family: 'Trebuchet MS', sans-serif;
+      margin-bottom: 1rem;
+      font-size: 1.75rem;
+    }
+
+    h3 {
+      color: #0b3d91;
+      font-family: 'Trebuchet MS', sans-serif;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    h4 {
+      color: #d7014d;
+      font-family: 'Trebuchet MS', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .deposit-info-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #d7014d;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+
+    h4 {
+      margin-top: 0;
+    }
+
+    .btn-primary {
+      background-color: #0b3d91;
+      border-color: #0b3d91;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      font-family: 'Trebuchet MS', sans-serif;
+
+      &:hover {
+        background-color: #d7014d;
+        border-color: #d7014d;
+        color: #ffd932;
+      }
+    }
+  }
+
+  .contact-section {
+    background-color: #ffffff;
+    border: 1px solid #d7014d;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+
+    p {
+      margin-bottom: 0.75rem;
+
+      strong {
+        color: #0b3d91;
+      }
+    }
+  }
+
+  .ucu-tab-panel {
+    padding-top: 0.5rem;
+  }
+
+  .ucu-btn {
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

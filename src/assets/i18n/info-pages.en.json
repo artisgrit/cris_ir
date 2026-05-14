@@ -1,0 +1,31 @@
+{
+  "info": {
+    "how-to-deposit": {
+      "title": "How to Deposit",
+      "breadcrumb": "How to Deposit",
+      "overview": "Overview",
+      "publications": "Publications & Outputs",
+      "data": "Research Data",
+      "theses": "Theses",
+      "batch": "Batch Upload",
+      "selfarchive": "Self-Archiving"
+    },
+    "data-reuse": {
+      "title": "How to Reuse Data",
+      "breadcrumb": "How to Reuse Data",
+      "discover": "Discover",
+      "reuse": "Reuse",
+      "cite": "Citing Data"
+    },
+    "governance-policies": {
+      "title": "Governance & Policies",
+      "breadcrumb": "Governance & Policies",
+      "overview": "Overview",
+      "preservation": "Preservation",
+      "identifiers": "Persistent Identifiers",
+      "service-level": "Service Level",
+      "terms-of-use": "Terms of Use",
+      "notice-takedown": "Notice & Takedown"
+    }
+  }
+}

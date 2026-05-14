@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ============================================================================
+     ACCESS STATUS METADATA CONFIGURATION
+     Configuration for Open Access, Embargoed, Published, Peer-Reviewed, etc. labels
+     This allows admin to set access status during item archiving
+     ============================================================================ -->
+
+<bean id="accessStatusMetadata" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacetConfiguration">
+    <property name="indexAlways" value="true"/>
+    <property name="facetLimit" value="10"/>
+    <property name="facetSort" value="count"/>
+    <property name="type" value="hierarchical"/>
+    <property name="sidebarFacets">
+        <list>
+            <bean class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+                <property name="filterType" value="text"/>
+                <property name="indexFieldName" value="dc.rights.access"/>
+            </bean>
+        </list>
+    </property>
+</bean>
+
+<!-- Access Status Filter for Item Lists -->
+<bean id="searchFilterAccessStatus" class="org.dspace.discovery.configuration.DiscoverySearchFilter">
+    <property name="filterType" value="text"/>
+    <property name="indexFieldName" value="dc.rights.access"/>
+    <property name="filterLabel" value="Access Status"/>
+    <property name="metadataFields">
+        <list>
+            <value>dc.rights.access</value>
+        </list>
+    </property>
+</bean>
+
+<!-- Access Status Value Pairs for Forms -->
+<value-pairs value-pairs-name="access_status" dc-term="access_status">
+    <pair>
+        <displayed-value>Open Access</displayed-value>
+        <stored-value>open access</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Embargoed</displayed-value>
+        <stored-value>embargoed</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Published</displayed-value>
+        <stored-value>published</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Peer Reviewed</displayed-value>
+        <stored-value>peer reviewed</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Post-Print</displayed-value>
+        <stored-value>post-print</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Pre-Print</displayed-value>
+        <stored-value>pre-print</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Controlled Access</displayed-value>
+        <stored-value>controlled access</stored-value>
+    </pair>
+    <pair>
+        <displayed-value>Restricted</displayed-value>
+        <stored-value>restricted</stored-value>
+    </pair>
+</value-pairs>

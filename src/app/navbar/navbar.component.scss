@@ -1,0 +1,174 @@
+:host {
+  --ds-expandable-navbar-height: auto;
+
+  nav.navbar {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    align-items: center;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    max-width: 100%;
+    box-shadow: none;
+    border: none;
+    flex-wrap: nowrap;
+
+    @media screen and (min-width: map-get($grid-breakpoints, md)) {
+      display: flex !important;
+      height: auto;
+    }
+  }
+
+  /** Mobile menu styling **/
+  @media screen and (max-width: map-get($grid-breakpoints, md)-0.02) {
+    .navbar {
+      width: 100vw;
+      background-color: var(--bs-white);
+      position: absolute;
+      overflow: hidden;
+      height: 0;
+      z-index: var(--ds-nav-z-index);
+      border-radius: 0;
+      margin: 0;
+      max-width: 100%;
+      box-shadow: none;
+
+      &.open {
+        height: auto;
+        min-height: 100vh;
+        border-bottom: 1px var(--ds-header-navbar-border-bottom-color) solid;
+      }
+    }
+  }
+
+  @media screen and (min-width: map-get($grid-breakpoints, md)) {
+    .reset-padding-md {
+      margin-left: calc(var(--bs-spacer) / -1);
+      margin-right: calc(var(--bs-spacer) / -1);
+    }
+  }
+
+  /* TODO remove when https://github.com/twbs/bootstrap/issues/24726 is fixed */
+  .navbar-expand-md.navbar-container {
+    @media screen and (max-width: map-get($grid-breakpoints, md)-0.02) {
+      > .navbar-inner-container {
+        padding: 0 var(--bs-spacer);
+      }
+      padding: 0;
+    }
+
+    @media screen and (min-width: map-get($grid-breakpoints, md)) {
+      > .navbar-inner-container {
+        display: flex !important;
+        flex-wrap: nowrap;
+        width: 100%;
+      }
+    }
+  }
+
+  #collapsingNav {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+
+    @media screen and (max-width: map-get($grid-breakpoints, md)-0.02) {
+      display: block !important;
+    }
+  }
+
+  .navbar-nav {
+    display: flex !important;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    &.navbar-nav-mobile {
+      flex-direction: column;
+      gap: 0;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    &.navbar-nav-desktop {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  #main-navbar ::ng-deep {
+    font-family: 'Trebuchet MS', sans-serif;
+
+    .ds-menu-item, .ds-menu-toggler-wrapper {
+      white-space: nowrap;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .dropdown-menu {
+      padding: 0.75rem !important;
+      border-radius: 8px;
+      border: 1px solid rgba(11, 61, 145, 0.15);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(11, 61, 145, 0.1);
+      min-width: 200px;
+    }
+
+    .ds-menu-item {
+      display: block;
+      color: #0b3d91;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      font-family: 'Trebuchet MS', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+
+      &:hover, &:focus {
+        color: #ffffff;
+        background-color: #0b3d91;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+    }
+
+    .nav-link {
+      font-family: 'Trebuchet MS', sans-serif;
+      color: #0b3d91;
+      transition: all 0.2s ease;
+      padding: 0.5rem 0 !important;
+      position: relative;
+
+      &:hover, &:focus {
+        color: #0b3d91;
+        text-decoration: none;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #5cb85c;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      &:hover::after, &:focus::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.request-a-copy-access-icon {
+  color: var(--bs-success);
+}
+
+.btn-download{
+  width: fit-content;
+}
+
+.file-download-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pdf-preview-btn {
+  border: 0;
+  background: transparent;
+  color: #d7014d;
+  padding: 0.15rem 0.25rem;
+  line-height: 1;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(215, 1, 77, 0.08);
+    outline: none;
+  }
+}

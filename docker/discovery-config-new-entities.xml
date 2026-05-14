@@ -1,0 +1,184 @@
+<!-- ============================================================================
+     DISCOVERY CONFIGURATIONS FOR NEW RESEARCH OUTPUT TYPES
+     Configuration for Book Chapters, Books, Masters Dissertations, and PhD Theses
+     ============================================================================ -->
+
+<!-- Book Chapter Configuration -->
+<entry key="bookchapter" value-ref="bookchapterConfiguration"/>
+
+<bean id="bookchapterConfiguration" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacetConfiguration">
+    <property name="indexAlways" value="true"/>
+    <property name="facetLimit" value="10"/>
+    <property name="facetSort" value="count"/>
+    <property name="type" value="text"/>
+    <!-- Sidebar facets to display for book chapters -->
+    <property name="sidebarFacets">
+        <list>
+            <ref bean="searchFilterType" />
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterLanguage" />
+        </list>
+    </property>
+    <!-- Search filters available for advanced search -->
+    <property name="searchFilters">
+        <list>
+            <ref bean="searchFilterType" />
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterLanguage" />
+        </list>
+    </property>
+    <!-- Sort configuration -->
+    <property name="searchSortConfiguration">
+        <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
+            <property name="sortFields">
+                <list>
+                    <ref bean="sortTitleAsc" />
+                    <ref bean="sortDateIssued" />
+                </list>
+            </property>
+        </bean>
+    </property>
+    <!-- Default filter queries -->
+    <property name="defaultFilterQueries">
+        <list>
+            <value>entityType_keyword:Publication</value>
+            <value>-withdrawn:true AND -discoverable:false</value>
+        </list>
+    </property>
+    <property name="defaultRpp" value="20" />
+</bean>
+
+<!-- Book Configuration -->
+<entry key="book" value-ref="bookConfiguration"/>
+
+<bean id="bookConfiguration" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacetConfiguration">
+    <property name="indexAlways" value="true"/>
+    <property name="facetLimit" value="10"/>
+    <property name="facetSort" value="count"/>
+    <property name="type" value="text"/>
+    <property name="sidebarFacets">
+        <list>
+            <ref bean="searchFilterType" />
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterPublisher" />
+            <ref bean="searchFilterLanguage" />
+        </list>
+    </property>
+    <property name="searchFilters">
+        <list>
+            <ref bean="searchFilterType" />
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterPublisher" />
+            <ref bean="searchFilterLanguage" />
+        </list>
+    </property>
+    <property name="searchSortConfiguration">
+        <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
+            <property name="sortFields">
+                <list>
+                    <ref bean="sortTitleAsc" />
+                    <ref bean="sortDateIssued" />
+                </list>
+            </property>
+        </bean>
+    </property>
+    <property name="defaultFilterQueries">
+        <list>
+            <value>entityType_keyword:Publication</value>
+            <value>-withdrawn:true AND -discoverable:false</value>
+        </list>
+    </property>
+    <property name="defaultRpp" value="20" />
+</bean>
+
+<!-- Masters Dissertation Configuration -->
+<entry key="masters_output" value-ref="mastersOutputConfiguration"/>
+
+<bean id="mastersOutputConfiguration" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacetConfiguration">
+    <property name="indexAlways" value="true"/>
+    <property name="facetLimit" value="10"/>
+    <property name="facetSort" value="count"/>
+    <property name="type" value="text"/>
+    <property name="sidebarFacets">
+        <list>
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterLanguage" />
+            <ref bean="searchFilterSubject" />
+        </list>
+    </property>
+    <property name="searchFilters">
+        <list>
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterLanguage" />
+            <ref bean="searchFilterSubject" />
+        </list>
+    </property>
+    <property name="searchSortConfiguration">
+        <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
+            <property name="sortFields">
+                <list>
+                    <ref bean="sortTitleAsc" />
+                    <ref bean="sortDateIssued" />
+                </list>
+            </property>
+        </bean>
+    </property>
+    <property name="defaultFilterQueries">
+        <list>
+            <value>entityType_keyword:Publication</value>
+            <value>dc.type:master thesis</value>
+            <value>-withdrawn:true AND -discoverable:false</value>
+        </list>
+    </property>
+    <property name="defaultRpp" value="20" />
+</bean>
+
+<!-- PhD Thesis Configuration -->
+<entry key="phd_output" value-ref="phdOutputConfiguration"/>
+
+<bean id="phdOutputConfiguration" class="org.dspace.discovery.configuration.DiscoverySearchFilterFacetConfiguration">
+    <property name="indexAlways" value="true"/>
+    <property name="facetLimit" value="10"/>
+    <property name="facetSort" value="count"/>
+    <property name="type" value="text"/>
+    <property name="sidebarFacets">
+        <list>
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterLanguage" />
+            <ref bean="searchFilterSubject" />
+        </list>
+    </property>
+    <property name="searchFilters">
+        <list>
+            <ref bean="searchFilterDateIssued" />
+            <ref bean="searchFilterAuthor" />
+            <ref bean="searchFilterLanguage" />
+            <ref bean="searchFilterSubject" />
+        </list>
+    </property>
+    <property name="searchSortConfiguration">
+        <bean class="org.dspace.discovery.configuration.DiscoverySortConfiguration">
+            <property name="sortFields">
+                <list>
+                    <ref bean="sortTitleAsc" />
+                    <ref bean="sortDateIssued" />
+                </list>
+            </property>
+        </bean>
+    </property>
+    <property name="defaultFilterQueries">
+        <list>
+            <value>entityType_keyword:Publication</value>
+            <value>dc.type:doctoral thesis</value>
+            <value>-withdrawn:true AND -discoverable:false</value>
+        </list>
+    </property>
+    <property name="defaultRpp" value="20" />
+</bean>

@@ -1,0 +1,19 @@
+import { Config } from '../../config/config.interface';
+
+/**
+ * Configuration interface used by the AccessibilitySettingsService
+ */
+export class AccessibilitySettingsConfig implements Config {
+  /**
+   * The duration in days after which the accessibility settings cookie expires
+   */
+  cookieExpirationDuration: number;
+
+  /**
+   * Screen reader feature configuration
+   */
+  screenReaderEnabled?: boolean;
+  screenReaderLanguage?: string;
+  screenReaderRate?: number;
+  screenReaderVoice?: string;
+}

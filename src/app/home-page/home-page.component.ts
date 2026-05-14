@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   isPlatformServer,
+  NgClass,
 } from '@angular/common';
 import {
   Component,
@@ -18,7 +19,9 @@ import {
   of,
 } from 'rxjs';
 import {
+  catchError,
   map,
+  startWith,
   switchMap,
   take,
 } from 'rxjs/operators';
@@ -65,6 +68,7 @@ import { ThemedHomeInfographicsComponent } from './home-infographics/themed-home
   imports: [
     AsyncPipe,
     HomeCoarComponent,
+    NgClass,
     RouterModule,
     SuggestionsPopupComponent,
     ThemedBrowseSectionComponent,
@@ -92,6 +96,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   searchSectionComponents$: Observable<SectionComponent[]>;
   facetSectionComponents$: Observable<SectionComponent[]>;
   mainSectionComponents$: Observable<SectionComponent[]>;
+  mainSectionComponentRows$: Observable<SectionComponent[][]>;
 
   hasHomeHeaderMetadata: boolean;
 
@@ -165,6 +170,29 @@ export class HomePageComponent implements OnInit, OnDestroy {
       map((components) => components.filter((c) => c.componentType !== 'facet' && c.componentType !== 'search')),
     );
 
+    // Non-top section rows from 'site' (browse, counters, text-row)
+    const siteNonTopRows$ = this.sectionComponents.pipe(
+      map((rows) => (rows ?? [])
+        .map((row) => row.filter((c) => c.componentType !== 'facet' && c.componentType !== 'search' && c.componentType !== 'top'))
+        .filter((row) => row.length > 0),
+      ),
+    );
+
+    // Top section rows from 'researchoutputs' — uses valid discovery configs, avoids the homepage error
+    const researchOutputsTopRows$ = this.sectionDataService.findById('researchoutputs').pipe(
+      getFirstSucceededRemoteDataPayload(),
+      map((section) => (section.componentRows ?? [])
+        .map((row) => row.filter((c) => c.componentType === 'top'))
+        .filter((row) => row.length > 0),
+      ),
+      catchError(() => of([] as SectionComponent[][])),
+      startWith([] as SectionComponent[][]),
+    );
+
+    this.mainSectionComponentRows$ = combineLatest([siteNonTopRows$, researchOutputsTopRows$]).pipe(
+      map(([siteNonTopRows, researchOutTopRows]) => [...siteNonTopRows, ...researchOutTopRows]),
+    );
+
     combineLatest([this.siteService.find().pipe(take(1)), this.locale.getCurrentLanguageCode()]).subscribe(
       ([site, language]: [Site, string]) => {
         this.hasHomeHeaderMetadata = !isEmpty(site?.firstMetadataValue('cris.cms.home-header',
@@ -177,6 +205,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
     const defaultCol = 'col-12';
     return (isNotEmpty(sectionComponent.style) && sectionComponent.style.includes('col')) ?
       sectionComponent.style : `${defaultCol} ${sectionComponent.style}`;
+  }
+
+  hasColClass(style: string): boolean {
+    return style?.split(' ').some((c) => c === 'col' || c.startsWith('col-')) ?? false;
   }
 
   /**

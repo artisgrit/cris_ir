@@ -33,30 +33,34 @@
     </aside>
 
     <main class="home-dspace-layout__main">
-      @for (sectionComponent of (mainSectionComponents$ | async); track sectionComponent) {
-        <div [class]="componentClass(sectionComponent)">
-          @switch (sectionComponent.componentType) {
-            @case ('top') {
-              <ds-top-section
-                [sectionId]="sectionId"
-                [topSection]="$any(sectionComponent)"></ds-top-section>
-            }
-            @case ('browse') {
-              <ds-browse-section
-                [sectionId]="sectionId"
-                [browseSection]="$any(sectionComponent)"></ds-browse-section>
-            }
-            @case ('counters') {
-              <ds-counters-section
-                [sectionId]="sectionId"
-                [countersSection]="$any(sectionComponent)"></ds-counters-section>
-            }
-            @case ('text-row') {
-              <ds-text-section
-                [sectionId]="sectionId"
-                [textRowSection]="$any(sectionComponent)"
-                [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-text-section>
-            }
+      @for (rowComponents of (mainSectionComponentRows$ | async); track rowComponents) {
+        <div class="row">
+          @for (sectionComponent of rowComponents; track sectionComponent) {
+            <div [ngClass]="sectionComponent.style" [class.col]="!hasColClass(sectionComponent.style)" class="pb-4">
+              @switch (sectionComponent.componentType) {
+                @case ('top') {
+                  <ds-top-section
+                    [sectionId]="sectionId"
+                    [topSection]="$any(sectionComponent)"></ds-top-section>
+                }
+                @case ('browse') {
+                  <ds-browse-section
+                    [sectionId]="sectionId"
+                    [browseSection]="$any(sectionComponent)"></ds-browse-section>
+                }
+                @case ('counters') {
+                  <ds-counters-section
+                    [sectionId]="sectionId"
+                    [countersSection]="$any(sectionComponent)"></ds-counters-section>
+                }
+                @case ('text-row') {
+                  <ds-text-section
+                    [sectionId]="sectionId"
+                    [textRowSection]="$any(sectionComponent)"
+                    [site]="$any(sectionComponent).contentType === 'text-metadata' ? site$.value : null"></ds-text-section>
+                }
+              }
+            </div>
           }
         </div>
       }

@@ -59,7 +59,6 @@ import { ThemedTextSectionComponent } from '../shared/explore/section-component/
 import { ThemedTopSectionComponent } from '../shared/explore/section-component/top-section/themed-top-section.component';
 import { HomeCoarComponent } from './home-coar/home-coar.component';
 import { ThemedHomeNewsComponent } from './home-news/themed-home-news.component';
-import { ThemedHomeInfographicsComponent } from './home-infographics/themed-home-infographics.component';
 
 @Component({
   selector: 'ds-base-home-page',
@@ -78,7 +77,6 @@ import { ThemedHomeInfographicsComponent } from './home-infographics/themed-home
     ThemedSearchSectionComponent,
     ThemedTextSectionComponent,
     ThemedTopSectionComponent,
-    ThemedHomeInfographicsComponent,
   ],
 })
 export class HomePageComponent implements OnInit, OnDestroy {

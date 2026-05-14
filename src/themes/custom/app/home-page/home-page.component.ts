@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HomeCoarComponent } from '../../../../app/home-page/home-coar/home-coar.component';
-import { ThemedHomeInfographicsComponent } from '../../../../app/home-page/home-infographics/themed-home-infographics.component';
 import { ThemedHomeNewsComponent } from '../../../../app/home-page/home-news/themed-home-news.component';
 import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
 import { SuggestionsPopupComponent } from '../../../../app/notifications/suggestions/popup/suggestions-popup.component';
@@ -33,7 +32,6 @@ import { ThemedTopSectionComponent } from '../../../../app/shared/explore/sectio
     ThemedCountersSectionComponent,
     ThemedFacetSectionComponent,
     ThemedHomeNewsComponent,
-    ThemedHomeInfographicsComponent,
     ThemedSearchSectionComponent,
     ThemedTextSectionComponent,
     ThemedTopSectionComponent,

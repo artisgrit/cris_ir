@@ -1,5 +1,0 @@
-rest:
-  ssl: true
-  host: dspacecris7.4science.cloud
-  port: 443
-  nameSpace: /server/api

@@ -20,6 +20,7 @@ import { LocaleService } from '../../core/locale/locale.service';
 import { Site } from '../../core/shared/site.model';
 import { isEmpty } from '../../shared/empty.util';
 import { ThemedTextSectionComponent } from '../../shared/explore/section-component/text-section/themed-text-section.component';
+import { ThemedHomeInfographicsComponent } from '../home-infographics/themed-home-infographics.component';
 
 @Component({
   selector: 'ds-base-home-news',
@@ -27,6 +28,7 @@ import { ThemedTextSectionComponent } from '../../shared/explore/section-compone
   templateUrl: './home-news.component.html',
   imports: [
     AsyncPipe,
+    ThemedHomeInfographicsComponent,
     ThemedTextSectionComponent,
   ],
 })

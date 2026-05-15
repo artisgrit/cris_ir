@@ -9,7 +9,7 @@
                              [textRowSection]="homeNewsSection"
                              [site]="(site$ | async)">
             </ds-text-section>
-            <ds-themed-home-infographics></ds-themed-home-infographics>
+            <ds-themed-home-infographics [variant]="'cards'"></ds-themed-home-infographics>
           } @else {
             <div class="d-flex flex-wrap">
               <div>
@@ -27,7 +27,7 @@
             <p>Explore our collections and discover the innovative research emerging from
               <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.
             </p>
-            <ds-themed-home-infographics></ds-themed-home-infographics>
+            <ds-themed-home-infographics [variant]="'cards'"></ds-themed-home-infographics>
           }
           </div>
         </div>

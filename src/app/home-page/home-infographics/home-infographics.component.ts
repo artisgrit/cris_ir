@@ -1,5 +1,6 @@
 import {
   Component,
+  Input,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -21,6 +22,7 @@ interface InfographicCard {
   imports: [CommonModule, RouterModule],
 })
 export class HomeInfographicsComponent {
+  @Input() variant: 'tabs' | 'cards' = 'tabs';
   activeTab = 'how-to-deposit';
 
   infographicCards: InfographicCard[] = [

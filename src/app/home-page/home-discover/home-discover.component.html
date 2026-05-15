@@ -1,0 +1,28 @@
+<section class="home-discover" aria-label="Discover">
+  <h2 class="home-discover__title">Discover</h2>
+
+  <ngb-accordion class="home-discover__accordion" [closeOthers]="true">
+    @for (facet of (facets$ | async); track facet) {
+      <ngb-panel [id]="facet.paramName">
+        <ng-template ngbPanelTitle>
+          {{ ('explore.index.' + facet.name) | translate }}
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="home-discover__values">
+            @for (facetValue of facet._embedded.values; track facetValue) {
+              <a
+                class="home-discover__value"
+                [routerLink]="getSearchLink()"
+                [queryParams]="getSearchQueryParams(facet, facetValue)"
+              >
+                <span class="home-discover__label">{{ facetValue.label }}</span>
+                <span class="home-discover__count">{{ facetValue.count }}</span>
+              </a>
+            }
+          </div>
+        </ng-template>
+      </ngb-panel>
+    }
+  </ngb-accordion>
+</section>
+

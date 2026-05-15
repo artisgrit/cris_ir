@@ -2,6 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { HomeNewsComponent as BaseComponent } from '../../../../../app/home-page/home-news/home-news.component';
+import { ThemedHomeInfographicsComponent } from '../../../../../app/home-page/home-infographics/themed-home-infographics.component';
 import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/section-component/text-section/themed-text-section.component';
 
 @Component({
@@ -12,6 +13,7 @@ import { ThemedTextSectionComponent } from '../../../../../app/shared/explore/se
   templateUrl: '../../../../../app/home-page/home-news/home-news.component.html',
   imports: [
     AsyncPipe,
+    ThemedHomeInfographicsComponent,
     ThemedTextSectionComponent,
   ],
 })

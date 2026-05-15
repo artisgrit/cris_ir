@@ -24,9 +24,10 @@
 
   <div class="container home-dspace-layout">
     <aside class="home-dspace-layout__sidebar" aria-label="Discover">
-      @for (facetComponent of (facetSectionComponents$ | async); track facetComponent) {
+      <h2 class="h5 mb-3">Discover</h2>
+      @for (facetComponent of (researchOutputsFacetSectionComponents$ | async); track facetComponent) {
         <ds-facet-section
-          [sectionId]="sectionId"
+          [sectionId]="'researchoutputs'"
           [facetSection]="$any(facetComponent)">
         </ds-facet-section>
       }

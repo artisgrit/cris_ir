@@ -80,6 +80,10 @@
 
   .home-dspace-layout__sidebar {
     min-width: 0;
+
+    ds-facet-section {
+      display: block;
+    }
   }
 
   .home-dspace-layout__main {

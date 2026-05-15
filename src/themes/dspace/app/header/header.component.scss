@@ -179,6 +179,7 @@
 
     #header-center {
       min-width: 0;
+      overflow: hidden;
 
       ds-navbar {
         display: block;
@@ -188,6 +189,8 @@
       /* Make the themed navbar sit inline in the header */
       nav#main-navbar.navbar {
         padding: 0;
+        max-height: var(--ds-header-height);
+        overflow: hidden;
       }
 
       /* Keep desktop items in one line; allow horizontal scroll if needed */
@@ -195,6 +198,7 @@
         min-width: 0;
         flex-wrap: nowrap !important;
         overflow-x: auto;
+        overflow-y: hidden;
         scrollbar-width: thin;
         -ms-overflow-style: none; /* IE/Edge legacy */
 
@@ -206,21 +210,25 @@
       /* Spread out the main menu items like a horizontal top nav */
       #main-site-navigation.navbar-nav-desktop {
         justify-content: flex-start !important;
-        gap: 1.5rem !important;
+        gap: 2rem !important;
         align-items: center !important;
       }
 
       #main-site-navigation {
         min-width: 0;
+        width: 100%;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
         .ds-menu-item,
         .ds-menu-toggler-wrapper {
           background: transparent !important;
           border-radius: 0 !important;
+          white-space: nowrap;
         }
 
         .ds-menu-item {
           padding: 0.25rem 0.25rem !important;
-          font-size: 1rem;
+          font-size: 0.98rem;
           font-weight: 500;
 
           &:hover,

@@ -6,7 +6,7 @@ import { HomeInfographicsComponent } from './home-infographics.component';
 
 @Component({
   selector: 'ds-themed-home-infographics',
-  styleUrls: [],
+  styleUrls: ['./home-infographics.component.scss'],
   templateUrl: './home-infographics.component.html',
   imports: [CommonModule, RouterModule],
 })

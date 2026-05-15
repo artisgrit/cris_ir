@@ -192,18 +192,26 @@
 
       /* Keep desktop items in one line; allow horizontal scroll if needed */
       .navbar-nav {
+        min-width: 0;
         flex-wrap: nowrap !important;
         overflow-x: auto;
         scrollbar-width: thin;
+        -ms-overflow-style: none; /* IE/Edge legacy */
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
 
       /* Spread out the main menu items like a horizontal top nav */
       #main-site-navigation.navbar-nav-desktop {
-        gap: 2rem !important;
+        justify-content: flex-start !important;
+        gap: 1.5rem !important;
         align-items: center !important;
       }
 
       #main-site-navigation {
+        min-width: 0;
         .ds-menu-item,
         .ds-menu-toggler-wrapper {
           background: transparent !important;

@@ -4,8 +4,8 @@
 
 .home-hero {
   position: relative;
-  min-height: 220px;
-  max-height: 280px;
+  min-height: 420px;
+  max-height: 520px;
   overflow: hidden;
   background: #0b3d91;
 }
@@ -13,17 +13,26 @@
 .home-hero__content {
   position: relative;
   z-index: 2;
-  min-height: 220px;
+  min-height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.25rem 0;
 }
 
+.home-hero__stack {
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
 .home-hero__card {
   background: rgba(255, 255, 255, 0.92);
   color: #111;
-  max-width: 860px;
+  max-width: 980px;
   width: 100%;
   padding: 1rem 1.25rem;
   border-radius: 6px;
@@ -81,19 +90,18 @@
   line-height: 1.6;
 }
 
-ds-themed-home-infographics {
+.home-hero__guides {
   display: block;
-  margin-top: 0.75rem;
 }
 
 @include media-breakpoint-down(md) {
   .home-hero {
-    min-height: 180px;
-    max-height: 220px;
+    min-height: 520px;
+    max-height: none;
   }
 
   .home-hero__content {
-    min-height: 180px;
+    min-height: 520px;
     padding: 1rem 0;
   }
 

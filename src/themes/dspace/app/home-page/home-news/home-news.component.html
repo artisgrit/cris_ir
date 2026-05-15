@@ -1,8 +1,12 @@
 <div class="home-hero mt-ncs" aria-label="Home hero">
   <div class="container home-hero__content">
-    <div class="home-hero__card">
-      <h1 class="home-hero__title">Uganda Christian University Digital Institutional Repository</h1>
-      <p class="home-hero__lead">A Centre of Excellence in the Heart of Africa</p>
+    <div class="home-hero__stack">
+      <div class="home-hero__card">
+        <h1 class="home-hero__title">Uganda Christian University Digital Institutional Repository</h1>
+        <p class="home-hero__lead">A Centre of Excellence in the Heart of Africa</p>
+      </div>
+
+      <ds-themed-home-infographics class="home-hero__guides" [variant]="'cards'"></ds-themed-home-infographics>
     </div>
   </div>
 
@@ -27,8 +31,6 @@
           <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.
         </p>
       }
-
-      <ds-themed-home-infographics [variant]="'cards'"></ds-themed-home-infographics>
     </div>
   </div>
 </section>

@@ -54,7 +54,7 @@
   .header-main {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: calc(var(--bs-spacer) * 2);
     width: 100%;
     flex-wrap: nowrap;
@@ -83,7 +83,7 @@
     flex: 1 1 auto;
     min-width: 0;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .navbar {
@@ -145,12 +145,16 @@
     }
 
     .header-site-nav ::ng-deep #main-site-navigation {
-      justify-content: center;
+      justify-content: flex-start;
       width: 100%;
     }
 
     .header-site-nav ::ng-deep nav.navbar {
       padding: 0;
+    }
+
+    .header-site-nav ::ng-deep #main-site-navigation {
+      gap: 2.25rem;
     }
 
     .navbar {

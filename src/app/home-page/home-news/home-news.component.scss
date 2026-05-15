@@ -6,10 +6,6 @@
     word-break: break-word;
 }
 
-.home-news-content {
-  background-color: var(--ds-home-news-background-color);
-}
-
 a {
   color: var(--ds-home-news-link-color);
 
@@ -18,39 +14,107 @@ a {
   }
 }
 
-/* Reduce hero height for themes using background image hero */
-:host ::ng-deep {
-  div.background-image-container {
-    min-height: 200px;
-
-    .container {
-      min-height: 200px;
-    }
-
-    .home-news-content {
-      padding: 1.5rem 0 !important;
-    }
-  }
+.home-hero {
+  position: relative;
+  min-height: 220px;
+  max-height: 280px;
+  overflow: hidden;
+  background: #0b3d91;
 }
 
-/* Reduce default (non-theme) hero vertical size */
-:host {
-  .home-news-content {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+.home-hero__content {
+  position: relative;
+  z-index: 2;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 0;
+}
+
+.home-hero__card {
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  max-width: 860px;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+}
+
+.home-hero__title {
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.home-hero__lead {
+  margin: 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.home-hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.home-hero__image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: none;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Remove any theme overlay gradients if present */
+:host ::ng-deep .home-hero::before {
+  content: none !important;
+}
+
+.home-hero__credits {
+  position: absolute;
+  right: var(--bs-spacer);
+  bottom: 0.25rem;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+}
+
+.home-news-section {
+  background: #ffffff;
+  padding: 1.25rem 0 0.5rem;
+}
+
+.home-news-section__inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.home-news-section__lead {
+  margin: 0 0 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+ds-themed-home-infographics {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+@include media-breakpoint-down(md) {
+  .home-hero {
+    min-height: 180px;
+    max-height: 220px;
   }
 
-  .bg-light.p-5 {
-    padding: 1.5rem !important;
+  .home-hero__content {
+    min-height: 180px;
+    padding: 1rem 0;
   }
 
-  .container-fluid.py-5 {
-    padding-top: 1.25rem !important;
-    padding-bottom: 1.25rem !important;
-  }
-
-  ds-themed-home-infographics {
-    display: block;
-    margin-top: 1.25rem;
+  .home-hero__card {
+    padding: 0.85rem 1rem;
   }
 }

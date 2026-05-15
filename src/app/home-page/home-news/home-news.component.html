@@ -1,40 +1,34 @@
-<div class="home-news-content py-4 px-2 py-sm-5 px-sm-0 mt-ncs mb-4">
-  <div class="container">
-    <div class="background-image">
-      <div class="container">
-        <div class="bg-light p-5 mb-4 rounded-3">
-          <div class="container-fluid py-5">
-            @if (hasHomeNewsMetadata) {
-            <ds-text-section [sectionId]="'site'"
-                             [textRowSection]="homeNewsSection"
-                             [site]="(site$ | async)">
-            </ds-text-section>
-            <ds-themed-home-infographics [variant]="'cards'"></ds-themed-home-infographics>
-          } @else {
-            <div class="d-flex flex-wrap">
-              <div>
-                <h1 class="display-2">Uganda Christian University Digital Institutional Repository (UCUDIR)</h1>
-                <p class="lead">Digital Institutional Repository: A Centre of Excellence in the Heart of Africa</p>
-              </div>
-            </div>
-            <ul>
-              <li>Preserve and provide access to UCU's scholarly, educational and cultural output
-              </li>
-              <li>Promote open access to research and knowledge, supporting global academic collaboration
-              </li>
-              <li>Ensure long-term preservation and visibility of UCU intellectual contributions</li>
-            </ul>
-            <p>Explore our collections and discover the innovative research emerging from
-              <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.
-            </p>
-            <ds-themed-home-infographics [variant]="'cards'"></ds-themed-home-infographics>
-          }
-          </div>
-        </div>
-      </div>
-      <small class="credits">Photo by
-        <a href="https://www.pexels.com/@inspiredimages">&#64;inspiredimages</a>
-      </small>
+<div class="home-hero mt-ncs" aria-label="Home hero">
+  <div class="container home-hero__content">
+    <div class="home-hero__card">
+      <h1 class="home-hero__title">Uganda Christian University Digital Institutional Repository (UCUDIR)</h1>
+      <p class="home-hero__lead">A Centre of Excellence in the Heart of Africa</p>
     </div>
   </div>
+
+  <picture class="home-hero__image">
+    <img alt="" [src]="'assets/images/background.jpg'"/>
+  </picture>
+  <small class="home-hero__credits">Uganda Christian University</small>
 </div>
+
+<section class="home-news-section" aria-label="Home news">
+  <div class="container">
+    <div class="home-news-section__inner">
+      @if (hasHomeNewsMetadata) {
+        <ds-text-section [sectionId]="'site'"
+                         [textRowSection]="homeNewsSection"
+                         [site]="(site$ | async)">
+        </ds-text-section>
+      } @else {
+        <p class="home-news-section__lead">
+          Preserve and provide access to UCU's scholarly output, promote open access, and ensure long-term visibility of UCU intellectual contributions.
+          Explore our collections and discover the innovative research emerging from
+          <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.
+        </p>
+      }
+
+      <ds-themed-home-infographics [variant]="'cards'"></ds-themed-home-infographics>
+    </div>
+  </div>
+</section>

@@ -5,8 +5,8 @@
 .home-guides__cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-  max-width: 920px;
+  gap: 1.1rem;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -15,12 +15,12 @@
   background: #fff;
   border: 1px solid #d0d7de;
   border-radius: 4px;
-  padding: 1.5rem 1.5rem 1.25rem;
-  min-height: 190px;
+  padding: 1.1rem 1.1rem 0.95rem;
+  min-height: 165px;
 }
 
 .home-guides__card-title {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
   margin: 0 0 0.75rem;
   color: #1e1e1e;
@@ -30,6 +30,7 @@
   margin: 0 0 1.25rem;
   color: #4f4f4f;
   line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .home-guides__card-link {

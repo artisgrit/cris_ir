@@ -9,66 +9,66 @@
   --discover-border: #d0d7de;
   --discover-text: #344563;
   --discover-shadow: 0 1px 0 rgba(31, 35, 40, 0.04);
+}
 
-  :host ::ng-deep .accordion-item {
-    border: 0;
-    background: transparent;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-item {
+  border: 0;
+  background: transparent;
+}
 
-  :host ::ng-deep .accordion-header {
-    margin: 0 0 0.6rem;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-header {
+  margin: 0 0 0.6rem;
+}
 
-  :host ::ng-deep .accordion-button {
-    background: var(--discover-bg);
-    border: 1px solid transparent;
-    border-radius: 6px;
-    color: var(--discover-text);
-    box-shadow: var(--discover-shadow);
-    padding: 0.9rem 1rem;
-    font-size: 1.05rem;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-button {
+  background: var(--discover-bg);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--discover-text);
+  box-shadow: var(--discover-shadow);
+  padding: 0.9rem 1rem;
+  font-size: 1.05rem;
+}
 
-  :host ::ng-deep .accordion-button.collapsed {
-    border-color: transparent;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-button.collapsed {
+  border-color: transparent;
+}
 
-  :host ::ng-deep .accordion-button:focus {
-    box-shadow: none;
-    border-color: var(--discover-border);
-    outline: none;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-button:focus {
+  box-shadow: none;
+  border-color: var(--discover-border);
+  outline: none;
+}
 
-  /* Replace bootstrap caret with + / − */
-  :host ::ng-deep .accordion-button::after {
-    background-image: none;
-    transform: none;
-    content: '+';
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #000;
-    width: auto;
-    height: auto;
-    line-height: 1;
-  }
+/* Replace bootstrap caret with + / − */
+:host ::ng-deep .home-discover__accordion .accordion-button::after {
+  background-image: none;
+  transform: none;
+  content: '+';
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #000;
+  width: auto;
+  height: auto;
+  line-height: 1;
+}
 
-  :host ::ng-deep .accordion-button:not(.collapsed)::after {
-    content: '−';
-  }
+:host ::ng-deep .home-discover__accordion .accordion-button:not(.collapsed)::after {
+  content: '−';
+}
 
-  :host ::ng-deep .accordion-collapse {
-    border: 0;
-    margin-top: -0.35rem;
-    margin-bottom: 0.6rem;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-collapse {
+  border: 0;
+  margin-top: -0.35rem;
+  margin-bottom: 0.6rem;
+}
 
-  :host ::ng-deep .accordion-body {
-    background: #fff;
-    border: 1px solid var(--discover-border);
-    border-top: 0;
-    border-radius: 0 0 6px 6px;
-    padding: 0.5rem 0.75rem;
-  }
+:host ::ng-deep .home-discover__accordion .accordion-body {
+  background: #fff;
+  border: 1px solid var(--discover-border);
+  border-top: 0;
+  border-radius: 0 0 6px 6px;
+  padding: 0.5rem 0.75rem;
 }
 
 .home-discover__values {

@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HomeCoarComponent } from '../../../../app/home-page/home-coar/home-coar.component';
+import { HomeDiscoverComponent } from '../../../../app/home-page/home-discover/home-discover.component';
 import { ThemedHomeNewsComponent } from '../../../../app/home-page/home-news/themed-home-news.component';
 import { HomePageComponent as BaseComponent } from '../../../../app/home-page/home-page.component';
 import { SuggestionsPopupComponent } from '../../../../app/notifications/suggestions/popup/suggestions-popup.component';
@@ -24,6 +25,7 @@ import { ThemedTopSectionComponent } from '../../../../app/shared/explore/sectio
   templateUrl: '../../../../app/home-page/home-page.component.html',
   imports: [
     AsyncPipe,
+    HomeDiscoverComponent,
     HomeCoarComponent,
     NgClass,
     RouterModule,

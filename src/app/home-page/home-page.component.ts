@@ -97,7 +97,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
   facetSectionComponents$: Observable<SectionComponent[]>;
   mainSectionComponents$: Observable<SectionComponent[]>;
   mainSectionComponentRows$: Observable<SectionComponent[][]>;
-  researchOutputsFacetSectionComponents$: Observable<SectionComponent[]>;
 
   hasHomeHeaderMetadata: boolean;
 
@@ -192,14 +191,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     this.mainSectionComponentRows$ = combineLatest([siteNonTopRows$, researchOutputsTopRows$]).pipe(
       map(([siteNonTopRows, researchOutTopRows]) => [...siteNonTopRows, ...researchOutTopRows]),
-    );
-
-    this.researchOutputsFacetSectionComponents$ = this.sectionDataService.findById('researchoutputs').pipe(
-      getFirstSucceededRemoteDataPayload(),
-      map((section) => (section?.componentRows ?? []).flat()),
-      map((components) => components.filter((c) => c.componentType === 'facet')),
-      catchError(() => of([] as SectionComponent[])),
-      startWith([] as SectionComponent[]),
     );
 
     combineLatest([this.siteService.find().pipe(take(1)), this.locale.getCurrentLanguageCode()]).subscribe(

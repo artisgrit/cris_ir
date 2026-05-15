@@ -1,3 +1,45 @@
 :host {
+  /* The themed navbar template doesn't use a Bootstrap `.navbar-expand-*` wrapper,
+     so we must explicitly set the desktop layout for `.navbar-nav`. */
+  #main-site-navigation {
+    display: flex;
+    min-width: 0;
+  }
 
+  @include media-breakpoint-up(md) {
+    #main-site-navigation.navbar-nav-desktop {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2rem;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    #main-site-navigation {
+      .ds-menu-item,
+      .ds-menu-toggler-wrapper,
+      .ds-menu-item-wrapper {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    #main-site-navigation.navbar-nav-mobile {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 0;
+      width: 100%;
+    }
+  }
 }

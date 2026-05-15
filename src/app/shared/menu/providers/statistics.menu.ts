@@ -161,7 +161,7 @@ export class StatisticsMenuProvider extends DSpaceObjectPageMenuProvider {
               id: 'statistics',
               active: false,
               visible: true,
-              index: 1,
+              index: 4,
               model: {
                 type: MenuItemType.TEXT,
                 text: 'menu.section.statistics',

@@ -65,8 +65,9 @@ export class ExploreMenuProvider extends AbstractMenuProvider {
         // If none of the expected ids exist, keep backend order as fallback
         const idsToRender = orderedIds.length > 0 ? orderedIds : rd.payload.page.map((s) => s.id);
 
-        return idsToRender.map((id) => ({
+        return idsToRender.map((id, index) => ({
           visible: true,
+          index: index + 1,
           model: {
             type: MenuItemType.LINK,
             text: `menu.section.explore_${id}`,

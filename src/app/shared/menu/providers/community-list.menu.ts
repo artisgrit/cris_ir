@@ -37,6 +37,7 @@ export class CommunityListMenuProvider extends AbstractMenuProvider {
     return of([
       {
         visible: true,
+        index: 0,
         model: {
           type: MenuItemType.LINK,
           text: `menu.section.communities_and_collections`,

@@ -154,6 +154,8 @@
     margin-left: 0;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     transition: all 0.3s ease;
+    width: auto;
+    max-width: 100%;
 
     &:hover {
       filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)) brightness(1.1);
@@ -306,7 +308,7 @@
     }
 
     img#header-logo {
-      height: clamp(44px, 10vw, 72px);
+      height: clamp(20px, 6vw, 32px);
       max-width: 48vw;
     }
 
@@ -324,6 +326,21 @@
         transform: scale(0.95);
         transform-origin: right center;
       }
+    }
+  }
+}
+
+:host {
+  @include media-breakpoint-up(md) {
+    img#header-logo {
+      height: 20px;
+      max-width: none;
+    }
+
+    /* Keep the logo + nav comfortably on one line */
+    #header-left a {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
   }
 }

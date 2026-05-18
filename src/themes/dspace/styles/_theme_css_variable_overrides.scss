@@ -12,8 +12,8 @@
   }*/
 
   @include media-breakpoint-up(md) {
-  --ds-header-logo-height: 73px;
-  --ds-header-height: 80px;
+  --ds-header-logo-height: 100px;
+  --ds-header-height: 110px;
 
   .header-logo {  // replace with your actual logo container class
     margin-left: 0;        // ensures no spacing from the left
@@ -23,8 +23,8 @@
 }
 
 @include media-breakpoint-down(md) {
-  --ds-header-logo-height: 73px;
-  --ds-header-height: 80px;
+  --ds-header-logo-height: 100px;
+  --ds-header-height: 110px;
 
   .header-logo {
     margin-left: 0;
@@ -34,8 +34,8 @@
 }
 
 @include media-breakpoint-down(sm) {
-  --ds-header-logo-height: 73px;
-  --ds-header-height: 64px;
+  --ds-header-logo-height: 100px;
+  --ds-header-height: 110px;
 }
 
   --ds-banner-text-background: rgba(0, 0, 0, 0.58);

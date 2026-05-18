@@ -337,7 +337,7 @@
 :host {
   @include media-breakpoint-up(md) {
     img#header-logo {
-      height: 20px;
+      height: var(--ds-header-logo-height);
       max-width: none;
     }
 

@@ -108,6 +108,17 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   itemPageRoute: string;
   openPdfInApp$ = this.accessibilitySettingsService.get('pdfViewerOpenInApp', 'true').pipe(map(v => v !== 'false'));
   pdfPreviewSrc = null;
+  citationStyle = 'APA';
+  readonly citationStyles = [
+    'APA',
+    'BibTeX',
+    'Chicago',
+    'Harvard',
+    'MHRA',
+    'MLA',
+    'OSCOLA',
+    'Vancouver',
+  ] as const;
 
   authorMetadata = environment.searchResult.authorMetadata;
 
@@ -205,6 +216,112 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
         });
       });
     });
+  }
+
+  onCitationStyleChange(style: string): void {
+    this.citationStyle = style;
+  }
+
+  getCitationText(style = this.citationStyle): string {
+    // Prefer a repository-provided citation if present.
+    const providedCitation = (this.dso?.firstMetadataValue('dc.identifier.citation') ?? '').trim();
+    if (providedCitation) {
+      return providedCitation;
+    }
+
+    const title = (this.dso?.firstMetadataValue('dc.title') ?? '').trim();
+    const publisher = (this.dso?.firstMetadataValue('dc.publisher') ?? '').trim();
+    const issued = (this.dso?.firstMetadataValue('dc.date.issued') ?? '').trim();
+    const year = issued ? issued.substring(0, 4) : '';
+
+    const doiRaw = (this.dso?.firstMetadataValue('dc.identifier.doi') ?? '').trim();
+    const doi = doiRaw ? (doiRaw.startsWith('http') ? doiRaw : `https://doi.org/${doiRaw}`) : '';
+
+    const uri = (this.dso?.firstMetadataValue('dc.identifier.uri') ?? '').trim();
+    const link = doi || uri;
+
+    const authors = [
+      ...(this.dso?.allMetadataValues('dc.contributor.author', this.placeholderFilter) ?? []),
+      ...(this.dso?.allMetadataValues('dc.creator', this.placeholderFilter) ?? []),
+    ].map((v) => (v ?? '').trim()).filter(Boolean);
+
+    const authorText = this.formatAuthors(authors, style);
+    const core = [authorText, year ? `(${year}).` : '', title ? `${title}.` : '', publisher ? `${publisher}.` : '', link].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+
+    switch (style) {
+      case 'BibTeX':
+        return this.toBibTeX(authors, year, title, publisher, doi || uri);
+      case 'Vancouver':
+        // Vancouver tends to omit parentheses and uses shorter punctuation.
+        return [authorText, year ? `${year}.` : '', title ? `${title}.` : '', publisher ? `${publisher}.` : '', link].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+      default:
+        return core;
+    }
+  }
+
+  async copyCitation(): Promise<void> {
+    const text = this.getCitationText();
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+    } catch {
+      // Fall back to legacy copy path below
+    }
+
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', 'true');
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    } catch {
+      // If copy fails, do nothing (user can still manually select/copy).
+    }
+  }
+
+  private formatAuthors(authors: string[], style: string): string {
+    if (!authors?.length) {
+      return '';
+    }
+    const unique = Array.from(new Set(authors));
+
+    // Lightweight formatting: keep names as provided, just join with style-appropriate separators.
+    switch (style) {
+      case 'Vancouver':
+        return unique.slice(0, 6).join(', ') + (unique.length > 6 ? ', et al.' : '');
+      case 'MLA':
+        return unique.length > 2 ? `${unique[0]}, et al.` : unique.join(', ');
+      case 'OSCOLA':
+        return unique.join(', ');
+      default:
+        return unique.join(', ');
+    }
+  }
+
+  private toBibTeX(authors: string[], year: string, title: string, publisher: string, identifier: string): string {
+    const safeKeyBase = (authors?.[0] ?? 'ucudir').replace(/[^a-zA-Z0-9]/g, '').toLowerCase() || 'ucudir';
+    const safeYear = year || 'n.d.';
+    const key = `${safeKeyBase}${safeYear}`.replace(/\./g, '');
+    const author = (authors ?? []).join(' and ');
+    const url = identifier?.startsWith('http') ? identifier : '';
+
+    const lines = [
+      `@misc{${key},`,
+      author ? `  author = {${author}},` : null,
+      title ? `  title = {${title}},` : null,
+      year ? `  year = {${year}},` : null,
+      publisher ? `  publisher = {${publisher}},` : null,
+      url ? `  url = {${url}},` : null,
+      `}`,
+    ].filter(Boolean);
+
+    return lines.join('\n');
   }
 
 }

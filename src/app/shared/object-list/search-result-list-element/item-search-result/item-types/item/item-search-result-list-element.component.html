@@ -121,6 +121,29 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
   </div>
   <div class="modal-body">
+    <section class="item-preview-citation" aria-label="Citation generator">
+      <h3 class="h6 mb-2">Citation</h3>
+      <div class="item-preview-citation__controls">
+        <label class="visually-hidden" for="citation-style-select">Citation style</label>
+        <select id="citation-style-select" class="form-select form-select-sm item-preview-citation__select"
+                [value]="citationStyle" (change)="onCitationStyleChange($any($event.target).value)">
+          @for (style of citationStyles; track style) {
+            <option [value]="style">{{ style }}</option>
+          }
+        </select>
+        <button type="button" class="btn btn-outline-primary btn-sm item-preview-citation__copy"
+                (click)="copyCitation()" aria-label="Copy citation">
+          <i class="fas fa-copy" aria-hidden="true"></i>
+          Copy citation
+        </button>
+      </div>
+      <textarea class="form-control item-preview-citation__text" rows="4" readonly
+                [value]="getCitationText()"
+                aria-label="Generated citation text"></textarea>
+      <div class="item-preview-citation__hint text-muted">
+        Citation is generated from item metadata. If you need a specific format, verify before use.
+      </div>
+    </section>
     <ds-inline-pdf-viewer [src]="pdfPreviewSrc" [title]="dsoTitle"></ds-inline-pdf-viewer>
   </div>
 </ng-template>

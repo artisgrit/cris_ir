@@ -35,3 +35,33 @@
     outline: none;
   }
 }
+
+.item-preview-citation {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  background: #fff;
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  &__select {
+    width: min(180px, 100%);
+  }
+
+  &__text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+  }
+
+  &__hint {
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+  }
+}

@@ -3,6 +3,7 @@ import {
   NgClass,
 } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -35,6 +36,7 @@ import { ThemedThumbnailComponent } from '../../../../../../../../../app/thumbna
     AdditionalMetadataComponent,
     AsyncPipe,
     EscapeHtmlPipe,
+    FormsModule,
     InWorkflowStatisticsComponent,
     InlinePdfViewerComponent,
     MetadataLinkViewComponent,

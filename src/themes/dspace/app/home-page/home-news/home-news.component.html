@@ -4,6 +4,12 @@
       <div class="home-hero__card">
         <h1 class="home-hero__title">Uganda Christian University Digital Institutional Repository</h1>
         <p class="home-hero__lead">A Centre of Excellence in the Heart of Africa</p>
+        <p class="home-news-section__lead">
+          Welcome to Uganda Christian University's Digital Institutional Repository. Preserve and provide access to the scholarly output of UCU,
+          promote open access to research and knowledge, and ensure long-term visibility of UCU intellectual contributions.
+          Explore our collections and discover the innovative research and scholarship emerging from
+          <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.
+        </p>
       </div>
 
       <ds-themed-home-infographics class="home-hero__guides" [variant]="'cards'"></ds-themed-home-infographics>
@@ -24,12 +30,7 @@
                          [textRowSection]="homeNewsSection"
                          [site]="(site$ | async)"></ds-text-section>
       } @else {
-        <p class="home-news-section__lead">
-          Welcome to Uganda Christian University's Digital Institutional Repository. Preserve and provide access to the scholarly output of UCU,
-          promote open access to research and knowledge, and ensure long-term visibility of UCU intellectual contributions.
-          Explore our collections and discover the innovative research and scholarship emerging from
-          <a href="https://www.ucu.ac.ug/" target="_blank" role="link" tabindex="0">Uganda Christian University</a>.
-        </p>
+
       }
     </div>
   </div>

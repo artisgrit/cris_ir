@@ -10,7 +10,7 @@
 
   .topbar-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     gap: calc(var(--bs-spacer) / 2);
     padding: 0.25rem 0;

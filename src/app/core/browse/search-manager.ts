@@ -77,8 +77,11 @@ export class SearchManager {
     useCachedVersionIfAvailable = true,
     reRequestOnStale = true,
     ...linksToFollow: FollowLinkConfig<T>[]): Observable<RemoteData<SearchObjects<T>>> {
-    const optionsWithDefaultProjection = Object.assign(new PaginatedSearchOptions({}), searchOptions, { projection: searchOptions.projection ?? 'preventMetadataSecurity' });
-    return this.searchService.search(optionsWithDefaultProjection, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
+    // NOTE: don't force the `preventMetadataSecurity` projection for the general search page.
+    // Forcing a projection here affects the `indexableObject` href returned by the discover endpoint,
+    // which can prevent thumbnails from being returned/resolved on `/search?query=`.
+    // The item page (`/entities/publication/...`) uses the default projection and resolves thumbnails correctly.
+    return this.searchService.search(searchOptions, responseMsToLive, useCachedVersionIfAvailable, reRequestOnStale, ...linksToFollow)
       .pipe(this.completeSearchObjectsWithExtraData());
   }
 

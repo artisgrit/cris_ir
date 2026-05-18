@@ -10,6 +10,7 @@ import {
   OnInit,
   Optional,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -77,6 +78,7 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
     AdditionalMetadataComponent,
     AsyncPipe,
     EscapeHtmlPipe,
+    FormsModule,
     InWorkflowStatisticsComponent,
     InlinePdfViewerComponent,
     MetadataLinkViewComponent,
@@ -108,6 +110,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   itemPageRoute: string;
   openPdfInApp$ = this.accessibilitySettingsService.get('pdfViewerOpenInApp', 'true').pipe(map(v => v !== 'false'));
   pdfPreviewSrc = null;
+  showBrandedCover = true;
   citationStyle = 'APA';
   readonly citationStyles = [
     'APA',
@@ -218,6 +221,35 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     });
   }
 
+  getPreviewItemUrl(): string {
+    const uri = (this.dso?.firstMetadataValue('dc.identifier.uri') ?? '').trim();
+    if (uri) {
+      return uri;
+    }
+    if (typeof window !== 'undefined' && window?.location?.origin) {
+      return `${window.location.origin}${this.itemPageRoute ?? ''}`;
+    }
+    return this.itemPageRoute ?? '';
+  }
+
+  getCoverAuthors(): string {
+    const authors = [
+      ...(this.dso?.allMetadataValues('dc.contributor.author', this.placeholderFilter) ?? []),
+      ...(this.dso?.allMetadataValues('dc.creator', this.placeholderFilter) ?? []),
+    ].map((v) => (v ?? '').trim()).filter(Boolean);
+
+    const unique = Array.from(new Set(authors));
+    if (!unique.length) {
+      return '';
+    }
+    return unique.slice(0, 5).join('; ') + (unique.length > 5 ? ' …' : '');
+  }
+
+  getCoverYear(): string {
+    const issued = (this.dso?.firstMetadataValue('dc.date.issued') ?? '').trim();
+    return issued ? issued.substring(0, 4) : '';
+  }
+
   onCitationStyleChange(style: string): void {
     this.citationStyle = style;
   }
@@ -245,17 +277,25 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
       ...(this.dso?.allMetadataValues('dc.creator', this.placeholderFilter) ?? []),
     ].map((v) => (v ?? '').trim()).filter(Boolean);
 
-    const authorText = this.formatAuthors(authors, style);
-    const core = [authorText, year ? `(${year}).` : '', title ? `${title}.` : '', publisher ? `${publisher}.` : '', link].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-
     switch (style) {
+      case 'APA':
+        return this.toApa7(authors, year, title, publisher, link);
       case 'BibTeX':
         return this.toBibTeX(authors, year, title, publisher, doi || uri);
+      case 'Chicago':
+        return this.toChicago(authors, year, title, publisher, link);
+      case 'Harvard':
+        return this.toHarvard(authors, year, title, publisher, link);
+      case 'MHRA':
+        return this.toMhra(authors, year, title, publisher, link);
+      case 'MLA':
+        return this.toMla(authors, year, title, publisher, link);
+      case 'OSCOLA':
+        return this.toOscola(authors, year, title, publisher, link);
       case 'Vancouver':
-        // Vancouver tends to omit parentheses and uses shorter punctuation.
-        return [authorText, year ? `${year}.` : '', title ? `${title}.` : '', publisher ? `${publisher}.` : '', link].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+        return this.toVancouver(authors, year, title, publisher, link);
       default:
-        return core;
+        return this.toApa7(authors, year, title, publisher, link);
     }
   }
 
@@ -285,23 +325,171 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     }
   }
 
-  private formatAuthors(authors: string[], style: string): string {
-    if (!authors?.length) {
-      return '';
-    }
-    const unique = Array.from(new Set(authors));
+  private uniq(values: string[]): string[] {
+    return Array.from(new Set((values ?? []).filter(Boolean)));
+  }
 
-    // Lightweight formatting: keep names as provided, just join with style-appropriate separators.
-    switch (style) {
-      case 'Vancouver':
-        return unique.slice(0, 6).join(', ') + (unique.length > 6 ? ', et al.' : '');
-      case 'MLA':
-        return unique.length > 2 ? `${unique[0]}, et al.` : unique.join(', ');
-      case 'OSCOLA':
-        return unique.join(', ');
-      default:
-        return unique.join(', ');
+  private toApa7(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    const authorText = this.formatAuthorsApa7(this.uniq(authors));
+    const parts = [
+      authorText,
+      year ? `(${year}).` : '(n.d.).',
+      title ? `${this.toSentenceCase(title)}.` : '',
+      publisher ? `${publisher}.` : '',
+      link,
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private toHarvard(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    const authorText = this.formatAuthorsHarvard(this.uniq(authors));
+    const parts = [
+      authorText,
+      year ? `(${year})` : '(n.d.)',
+      title ? `${title}.` : '',
+      publisher ? `${publisher}.` : '',
+      link ? `Available at: ${link}.` : '',
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private toChicago(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    const authorText = this.formatAuthorsChicago(this.uniq(authors));
+    const parts = [
+      authorText ? `${authorText}.` : '',
+      title ? `"${title}".` : '',
+      publisher ? `${publisher},` : '',
+      year || 'n.d.',
+      link ? `${link}.` : '',
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private toMla(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    const authorText = this.formatAuthorsMla(this.uniq(authors));
+    const parts = [
+      authorText ? `${authorText}.` : '',
+      title ? `"${title}".` : '',
+      publisher ? `${publisher},` : '',
+      year || 'n.d.',
+      link ? `${link}.` : '',
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private toMhra(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    const authorText = this.formatAuthorsMhra(this.uniq(authors));
+    const parts = [
+      authorText ? `${authorText},` : '',
+      title ? `"${title}"` : '',
+      publisher ? `(${publisher}${year ? `, ${year}` : ''})` : (year ? `(${year})` : ''),
+      link ? `${link}.` : '',
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private toOscola(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    // OSCOLA is legal-focused; keep a conservative, readable format.
+    const authorText = this.formatAuthorsOscola(this.uniq(authors));
+    const parts = [
+      authorText ? `${authorText},` : '',
+      title ? `${title},` : '',
+      publisher || '',
+      year ? `(${year})` : '',
+      link,
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private toVancouver(authors: string[], year: string, title: string, publisher: string, link: string): string {
+    const authorText = this.formatAuthorsVancouver(this.uniq(authors));
+    const parts = [
+      authorText,
+      title ? `${title}.` : '',
+      publisher ? `${publisher}.` : '',
+      year ? `${year}.` : '',
+      link,
+    ].filter(Boolean);
+    return parts.join(' ').replace(/\s+/g, ' ').trim();
+  }
+
+  private formatAuthorsApa7(authors: string[]): string {
+    if (!authors.length) return '';
+    const formatted = authors.map((a) => this.toApaName(a)).filter(Boolean);
+    if (!formatted.length) return '';
+
+    // APA 7: list up to 20 authors. If > 20, include first 19, ellipsis, and final author.
+    if (formatted.length > 20) {
+      const first19 = formatted.slice(0, 19);
+      const last = formatted[formatted.length - 1];
+      return `${first19.join(', ')}, … ${last}`;
     }
+    if (formatted.length === 1) return formatted[0];
+    if (formatted.length === 2) return `${formatted[0]} & ${formatted[1]}`;
+    return `${formatted.slice(0, -1).join(', ')}, & ${formatted[formatted.length - 1]}`;
+  }
+
+  private formatAuthorsHarvard(authors: string[]): string {
+    if (!authors.length) return '';
+    if (authors.length === 1) return authors[0];
+    if (authors.length === 2) return `${authors[0]} and ${authors[1]}`;
+    return `${authors[0]} et al.`;
+  }
+
+  private formatAuthorsChicago(authors: string[]): string {
+    if (!authors.length) return '';
+    if (authors.length === 1) return authors[0];
+    if (authors.length === 2) return `${authors[0]} and ${authors[1]}`;
+    return `${authors[0]} et al.`;
+  }
+
+  private formatAuthorsMla(authors: string[]): string {
+    if (!authors.length) return '';
+    if (authors.length === 1) return authors[0];
+    return `${authors[0]}, et al`;
+  }
+
+  private formatAuthorsMhra(authors: string[]): string {
+    if (!authors.length) return '';
+    if (authors.length === 1) return authors[0];
+    if (authors.length === 2) return `${authors[0]} and ${authors[1]}`;
+    return `${authors[0]} and others`;
+  }
+
+  private formatAuthorsOscola(authors: string[]): string {
+    if (!authors.length) return '';
+    return authors.length > 2 ? `${authors[0]} and others` : authors.join(' and ');
+  }
+
+  private formatAuthorsVancouver(authors: string[]): string {
+    if (!authors.length) return '';
+    return authors.slice(0, 6).join(', ') + (authors.length > 6 ? ', et al.' : '');
+  }
+
+  private toApaName(name: string): string {
+    const trimmed = (name ?? '').trim();
+    if (!trimmed) return '';
+
+    // If already "Last, F." style, keep it.
+    if (trimmed.includes(',')) {
+      return trimmed;
+    }
+
+    // Heuristic: "First Middle Last" -> "Last, F. M."
+    const parts = trimmed.split(/\s+/).filter(Boolean);
+    if (parts.length === 1) return parts[0];
+    const last = parts[parts.length - 1];
+    const initials = parts.slice(0, -1).map((p) => p[0]?.toUpperCase()).filter(Boolean).map((i) => `${i}.`).join(' ');
+    return `${last}, ${initials}`.trim();
+  }
+
+  private toSentenceCase(value: string): string {
+    const trimmed = (value ?? '').trim();
+    if (!trimmed) return '';
+    // Keep acronyms/initialisms; only lowercase the tail as a heuristic.
+    const firstChar = trimmed[0].toUpperCase();
+    const rest = trimmed.slice(1);
+    return `${firstChar}${rest}`;
   }
 
   private toBibTeX(authors: string[], year: string, title: string, publisher: string, identifier: string): string {

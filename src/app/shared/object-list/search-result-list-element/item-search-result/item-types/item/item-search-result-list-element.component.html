@@ -121,6 +121,41 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
   </div>
   <div class="modal-body">
+    @if (showBrandedCover) {
+      <section class="item-preview-cover" aria-label="UCU branded cover">
+        <div class="item-preview-cover__brand">
+          <img class="item-preview-cover__logo" src="assets/images/ucu-logo.png" alt="Uganda Christian University logo" loading="lazy">
+          <div class="item-preview-cover__brand-text">
+            <div class="item-preview-cover__brand-name">Uganda Christian University</div>
+            <div class="item-preview-cover__brand-sub">Digital Institutional Repository</div>
+          </div>
+        </div>
+
+        <div class="item-preview-cover__card">
+          <div class="item-preview-cover__title">{{ dsoTitle }}</div>
+          @if (getCoverAuthors()) {
+            <div class="item-preview-cover__authors">{{ getCoverAuthors() }}</div>
+          }
+          @if (getCoverYear()) {
+            <div class="item-preview-cover__year">{{ getCoverYear() }}</div>
+          }
+          <div class="item-preview-cover__publisher">
+            {{ dso?.firstMetadataValue('dc.publisher') || 'Uganda Christian University' }}
+          </div>
+          <a class="item-preview-cover__url" [href]="getPreviewItemUrl()" target="_blank" rel="noopener noreferrer">
+            {{ getPreviewItemUrl() }}
+          </a>
+        </div>
+
+        <div class="item-preview-cover__footer text-muted">
+          Downloaded from the Uganda Christian University Digital Institutional Repository.
+        </div>
+      </section>
+    }
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="toggleBrandedCover" [(ngModel)]="showBrandedCover">
+      <label class="form-check-label" for="toggleBrandedCover">Show UCU branded cover</label>
+    </div>
     <section class="item-preview-citation" aria-label="Citation generator">
       <h3 class="h6 mb-2">Citation</h3>
       <div class="item-preview-citation__controls">
@@ -128,7 +163,7 @@
         <select id="citation-style-select" class="form-select form-select-sm item-preview-citation__select"
                 [value]="citationStyle" (change)="onCitationStyleChange($any($event.target).value)">
           @for (style of citationStyles; track style) {
-            <option [value]="style">{{ style }}</option>
+            <option [value]="style">{{ style === 'APA' ? 'APA (7th)' : style }}</option>
           }
         </select>
         <button type="button" class="btn btn-outline-primary btn-sm item-preview-citation__copy"

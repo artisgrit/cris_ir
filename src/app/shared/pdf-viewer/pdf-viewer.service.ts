@@ -34,10 +34,11 @@ export class PdfViewerService {
     }
     const uuid = match[1];
     const query = match[2] ?? '';
+    // NOTE: `rest.baseUrl` already includes the REST namespace (e.g. `https://host/server`),
+    // so we must NOT append `rest.nameSpace` again here, otherwise URLs become `/server/server/...`.
     const base = new URLCombiner(
       this.appConfig.rest.baseUrl,
-      this.appConfig.rest.nameSpace,
-      'core/bitstreams',
+      'api/core/bitstreams',
       uuid,
       'content',
     ).toString();

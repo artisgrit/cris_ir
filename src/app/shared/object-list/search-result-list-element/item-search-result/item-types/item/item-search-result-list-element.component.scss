@@ -65,3 +65,76 @@
     margin-top: 0.35rem;
   }
 }
+
+.item-preview-cover {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: #fff;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__logo {
+    width: 64px;
+    height: auto;
+    display: block;
+  }
+
+  &__brand-text {
+    min-width: 0;
+  }
+
+  &__brand-name {
+    font-weight: 800;
+    color: #0b3d91;
+    line-height: 1.1;
+  }
+
+  &__brand-sub {
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  &__card {
+    background: rgba(11, 61, 145, 0.06);
+    border: 1px solid rgba(11, 61, 145, 0.12);
+    border-radius: 10px;
+    padding: 0.9rem;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 1.05rem;
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
+  }
+
+  &__authors {
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+  }
+
+  &__year {
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 0.25rem;
+  }
+
+  &__publisher {
+    margin-bottom: 0.15rem;
+  }
+
+  &__url {
+    word-break: break-all;
+  }
+
+  &__footer {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+  }
+}

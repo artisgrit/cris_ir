@@ -103,6 +103,22 @@
     </ds-item-page-uri-field>
     <ds-item-page-cc-license-field [item]="object" [variant]="'full'">
     </ds-item-page-cc-license-field>
+    <ds-metadata-field-wrapper [hideIfNoTextContent]="false" [label]="'License'">
+      <div class="d-flex align-items-start gap-3 flex-wrap">
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer"
+           aria-label="Creative Commons Attribution 4.0 International License">
+          <img src="assets/images/cc-licenses/by.png" alt="CC BY 4.0" style="width: 120px; height: auto;" loading="lazy">
+        </a>
+        <div style="max-width: 820px;">
+          <div class="fw-bold">Creative Commons Attribution 4.0 International License</div>
+          <div>
+            Except where otherwise noted, this work is subject to a
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution 4.0 International License</a>,
+            which allows anyone to share and adapt our materials as long as proper attribution is given.
+          </div>
+        </div>
+      </div>
+    </ds-metadata-field-wrapper>
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']" role="button" role="button" tabindex="0">
         <i class="fas fa-info-circle"></i> {{"item.page.link.full" | translate}}

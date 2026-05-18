@@ -166,6 +166,7 @@ export class HeadTagService {
     ).subscribe(uiOrigin => this.origin = uiOrigin);
 
     this.clearMetaTags();
+    this.setCanonicalLinkTag();
 
     if (hasValue(routeInfo.data.value.dso) && hasValue(routeInfo.data.value.dso.payload)) {
       this.currentObject.next(routeInfo.data.value.dso.payload);
@@ -804,6 +805,7 @@ export class HeadTagService {
 
   protected clearMetaTags() {
     this.schemaJsonLDService.removeStructuredData();
+    this.removeCanonicalLinkTag();
     this.store.pipe(
       select(tagsInUseSelector),
       take(1),
@@ -815,6 +817,24 @@ export class HeadTagService {
       }
       this.store.dispatch(new ClearMetaTagAction());
     });
+  }
+
+  private setCanonicalLinkTag(url?: string): void {
+    const canonicalUrl = url ?? new URLCombiner(this.getUrlOrigin(), this.router.url).toString();
+    let canonicalEl = this._document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonicalEl) {
+      canonicalEl = this._document.createElement('link');
+      canonicalEl.setAttribute('rel', 'canonical');
+      this._document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.setAttribute('href', canonicalUrl);
+  }
+
+  private removeCanonicalLinkTag(): void {
+    const canonicalEl = this._document.head.querySelector('link[rel="canonical"]');
+    if (canonicalEl) {
+      this._document.head.removeChild(canonicalEl);
+    }
   }
 
   private addFallbackImageToTag(tag: string) {

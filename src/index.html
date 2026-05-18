@@ -11,13 +11,24 @@
   <meta name="description" content="Uganda Christian University Institutional Repository - A Centre of Excellence in the Heart of Africa">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="content-language" content="en">
+
+  <!-- GEO / Local signals (robust, production-safe: no hardcoded coordinates) -->
   <meta name="geo.region" content="UG">
+  <meta name="geo.country" content="UG">
   <meta name="geo.placename" content="Uganda Christian University, Mukono, Uganda">
+  <meta name="ICBM" content="Mukono, Uganda">
+
+  <link rel="canonical" href="/">
+  <link rel="alternate" hreflang="en" href="/">
   <meta name="og:title" property="og:title" content="Uganda Christian University Institutional Repository">
   <meta name="og:description" property="og:description" content="Uganda Christian University Institutional Repository - A Centre of Excellence in the Heart of Africa">
   <meta name="og:image" property="og:image" content="/assets/images/ucu-logo.png">
   <meta name="og:url" property="og:url" content="">
   <meta name="og:type" property="og:type" content="website">
+  <meta name="og:site_name" property="og:site_name" content="Uganda Christian University - Digital Institutional Repository">
+  <meta name="og:locale" property="og:locale" content="en_UG">
   <meta name="twitter:title" property="twitter:title" content="Uganda Christian University Institutional Repository">
   <meta name="twitter:description" property="twitter:description" content="Uganda Christian University Institutional Repository - A Centre of Excellence in the Heart of Africa">
   <meta name="twitter:image" property="twitter:image" content="/assets/images/ucu-logo.png">
@@ -27,15 +38,24 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": "CollegeOrUniversity",
+          "@id": "#ucu",
           "name": "Uganda Christian University",
           "url": "https://www.ucu.ac.ug/",
-          "logo": "/assets/images/ucu-logo.png"
+          "logo": "/assets/images/ucu-logo.png",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Mukono",
+            "addressCountry": "UG"
+          }
         },
         {
           "@type": "WebSite",
+          "@id": "#ucudir",
           "name": "Uganda Christian University - Digital Institutional Repository",
           "url": "/",
+          "inLanguage": "en",
+          "publisher": { "@id": "#ucu" },
           "potentialAction": {
             "@type": "SearchAction",
             "target": {
@@ -44,6 +64,14 @@
             },
             "query-input": "required name=search_term_string"
           }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "#home",
+          "url": "/",
+          "name": "Uganda Christian University - Digital Institutional Repository",
+          "isPartOf": { "@id": "#ucudir" },
+          "about": { "@id": "#ucu" }
         }
       ]
     }

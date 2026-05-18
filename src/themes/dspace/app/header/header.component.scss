@@ -214,6 +214,10 @@
         justify-content: flex-start !important;
         gap: clamp(0.75rem, 2vw, 1.25rem) !important;
         align-items: center !important;
+
+        @include media-breakpoint-up(md) {
+          margin-left: 50px !important;
+        }
       }
 
       #main-site-navigation {

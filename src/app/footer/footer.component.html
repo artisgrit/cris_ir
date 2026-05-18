@@ -71,53 +71,53 @@
             </button>
           </li>
         }
-        <li>
-          <a class="btn text-white"
-          routerLink="info/accessibility" role="link" tabindex="0">{{ 'footer.link.accessibility' | translate }}</a>
-        </li>
-        @if (showPrivacyPolicy) {
-          <li>
-            <a class="btn text-white"
-            routerLink="info/privacy" role="link" tabindex="0">{{ 'footer.link.privacy-policy' | translate}}</a>
-          </li>
-        }
-        @if (showEndUserAgreement) {
-          <li>
-            <a class="btn text-white"
-            routerLink="info/end-user-agreement" role="link" tabindex="0">{{ 'footer.link.end-user-agreement' | translate}}</a>
-          </li>
-        }
-        @if (showSendFeedback$ | async) {
-          <li>
-            <a class="btn text-white"
-            routerLink="info/feedback" role="link" tabindex="0">{{ 'footer.link.feedback' | translate}}</a>
-          </li>
-        }
+         <li>
+           <a class="btn text-white"
+          routerLink="/info/accessibility" role="link" tabindex="0">{{ 'footer.link.accessibility' | translate }}</a>
+         </li>
+         @if (showPrivacyPolicy) {
+           <li>
+             <a class="btn text-white"
+            routerLink="/info/privacy" role="link" tabindex="0">{{ 'footer.link.privacy-policy' | translate}}</a>
+           </li>
+         }
+         @if (showEndUserAgreement) {
+           <li>
+             <a class="btn text-white"
+            routerLink="/info/end-user-agreement" role="link" tabindex="0">{{ 'footer.link.end-user-agreement' | translate}}</a>
+           </li>
+         }
+         @if (showSendFeedback$ | async) {
+           <li>
+             <a class="btn text-white"
+            routerLink="/info/feedback" role="link" tabindex="0">{{ 'footer.link.feedback' | translate}}</a>
+           </li>
+         }
         <li ngbDropdown class="footer-link-dropdown">
           <button class="btn btn-link text-white dropdown-toggle" type="button" ngbDropdownToggle aria-label="Open quick links">
             Quick links
           </button>
           <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="https://mailx.ucu.ac.ug" target="_blank" rel="noopener">Webmail</a>
-            <a class="dropdown-item" href="https://students.ucu.ac.ug" target="_blank" rel="noopener">Students Mail</a>
-            <a class="dropdown-item" href="https://alpha.ucu.ac.ug" target="_blank" rel="noopener">Alpha</a>
-            <a class="dropdown-item" href="https://alpha.ucu.ac.ug/careers" target="_blank" rel="noopener">Careers</a>
+            <a class="dropdown-item" href="https://mailx.ucu.ac.ug" target="_blank" rel="noopener noreferrer">Webmail</a>
+            <a class="dropdown-item" href="https://students.ucu.ac.ug" target="_blank" rel="noopener noreferrer">Students Mail</a>
+            <a class="dropdown-item" href="https://alpha.ucu.ac.ug" target="_blank" rel="noopener noreferrer">Alpha</a>
+            <a class="dropdown-item" href="https://alpha.ucu.ac.ug/careers" target="_blank" rel="noopener noreferrer">Careers</a>
             <div class="dropdown-divider"></div>
             <div class="dropdown-header">e-Learning</div>
-            <a class="dropdown-item" href="https://elearning.ucu.ac.ug" target="_blank" rel="noopener">e-Learning Portal</a>
-            <a class="dropdown-item" href="https://moodle.ucu.ac.ug" target="_blank" rel="noopener">UCU eLearning Platform (Moodle)</a>
+            <a class="dropdown-item" href="https://elearning.ucu.ac.ug" target="_blank" rel="noopener noreferrer">e-Learning Portal</a>
+            <a class="dropdown-item" href="https://moodle.ucu.ac.ug" target="_blank" rel="noopener noreferrer">UCU eLearning Platform (Moodle)</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="https://uis.ucu.ac.ug" target="_blank" rel="noopener">UIS</a>
+            <a class="dropdown-item" href="https://uis.ucu.ac.ug" target="_blank" rel="noopener noreferrer">UIS</a>
             <div class="dropdown-divider"></div>
             <div class="dropdown-header">Research at UCU</div>
-            <a class="dropdown-item" href="https://ucudir.ucu.ac.ug" target="_blank" rel="noopener">Institutional Repository</a>
+            <a class="dropdown-item" href="https://ucudir.ucu.ac.ug" target="_blank" rel="noopener noreferrer">Institutional Repository</a>
           </div>
         </li>
       </ul>
     </div>
     @if (coarLdnEnabled$ | async) {
       <div class="notify-enabled text-white">
-        <a class="coar-notify-support-route" routerLink="info/coar-notify-support" role="link" tabindex="0">
+        <a class="coar-notify-support-route" routerLink="/info/coar-notify-support" role="link" tabindex="0">
           <img class="n-coar" src="assets/images/n-coar.svg" [attr.alt]="'menu.header.image.logo' | translate" />
           {{ 'footer.link.coar-notify-support' | translate }}
         </a>

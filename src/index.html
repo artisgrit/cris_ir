@@ -13,6 +13,8 @@
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="content-language" content="en">
+  <meta name="application-name" content="UCU Digital IR">
+  <meta name="apple-mobile-web-app-title" content="UCU Digital IR">
 
   <!-- GEO / Local signals (robust, production-safe: no hardcoded coordinates) -->
   <meta name="geo.region" content="UG">
@@ -33,6 +35,7 @@
   <meta name="twitter:description" property="twitter:description" content="Uganda Christian University Institutional Repository - A Centre of Excellence in the Heart of Africa">
   <meta name="twitter:image" property="twitter:image" content="/assets/images/ucu-logo.png">
   <meta name="twitter:card" property="twitter:card" content="summary_large_image">
+  <meta name="twitter:dnt" content="on">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -41,21 +44,109 @@
           "@type": "CollegeOrUniversity",
           "@id": "#ucu",
           "name": "Uganda Christian University",
+          "alternateName": [
+            "UCU",
+            "Uganda Christian University (UCU)"
+          ],
           "url": "https://www.ucu.ac.ug/",
           "logo": "/assets/images/ucu-logo.png",
+          "description": "Uganda Christian University (UCU) is a Christian university in Uganda committed to teaching, research, and community service in East Africa and beyond.",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Mukono",
             "addressCountry": "UG"
-          }
+          },
+          "areaServed": [
+            { "@type": "Place", "name": "Uganda" },
+            { "@type": "Place", "name": "East Africa" },
+            { "@type": "Place", "name": "Africa" },
+            { "@type": "Place", "name": "Worldwide" }
+          ],
+          "keywords": [
+            "Christian university",
+            "Christian university in Uganda",
+            "Christian university in Africa",
+            "higher education",
+            "research",
+            "theology",
+            "religion",
+            "Uganda",
+            "East Africa",
+            "Africa"
+          ],
+          "knowsAbout": [
+            "theology",
+            "Christian education",
+            "research",
+            "research methods",
+            "research design",
+            "policy research",
+            "open science",
+            "open research",
+            "open access publishing",
+            "institutional repositories",
+            "scholarly communication",
+            "save the mothers",
+            "divinity",
+            "Christianity in Uganda",
+            "Christianity in Africa",
+            "mechatronics in Uganda",
+            "data science in Uganda",
+            "computational biology"
+          ]
         },
         {
           "@type": "WebSite",
           "@id": "#ucudir",
           "name": "Uganda Christian University - Digital Institutional Repository",
+          "alternateName": [
+            "UCU Digital IR",
+            "UCU Institutional Repository",
+            "UCU Digital Institutional Repository"
+          ],
           "url": "/",
           "inLanguage": "en",
           "publisher": { "@id": "#ucu" },
+          "description": "The Uganda Christian University Digital Institutional Repository preserves and provides access to UCU’s scholarly output, supports open research, and improves the worldwide visibility of academic work.",
+          "keywords": [
+            "institutional repository",
+            "digital repository",
+            "open access",
+            "open research",
+            "scholarly communication",
+            "research outputs",
+            "theses and dissertations",
+            "journal articles",
+            "datasets",
+            "theology",
+            "Christian university",
+            "Uganda",
+            "East Africa",
+            "Africa"
+          ],
+          "license": "https://creativecommons.org/licenses/by/4.0/",
+          "isAccessibleForFree": true,
+          "about": [
+            { "@type": "Thing", "name": "University research" },
+            { "@type": "Thing", "name": "Research" },
+            { "@type": "Thing", "name": "Research methods" },
+            { "@type": "Thing", "name": "Research design" },
+            { "@type": "Thing", "name": "Policy research" },
+            { "@type": "Thing", "name": "Open science" },
+            { "@type": "Thing", "name": "Institutional repositories" },
+            { "@type": "Thing", "name": "Open access" },
+            { "@type": "Thing", "name": "Open research" },
+            { "@type": "Thing", "name": "Theology" },
+            { "@type": "Thing", "name": "Divinity" },
+            { "@type": "Thing", "name": "Save the Mothers" },
+            { "@type": "Thing", "name": "Mechatronics" },
+            { "@type": "Thing", "name": "Data science" },
+            { "@type": "Thing", "name": "Computational biology" },
+            { "@type": "Thing", "name": "Christian education" },
+            { "@type": "Place", "name": "Uganda" },
+            { "@type": "Place", "name": "East Africa" },
+            { "@type": "Place", "name": "Africa" }
+          ],
           "potentialAction": {
             "@type": "SearchAction",
             "target": {
@@ -71,7 +162,42 @@
           "url": "/",
           "name": "Uganda Christian University - Digital Institutional Repository",
           "isPartOf": { "@id": "#ucudir" },
-          "about": { "@id": "#ucu" }
+          "about": { "@id": "#ucu" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "/assets/images/ucu-logo.png"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "#faq",
+          "isPartOf": { "@id": "#home" },
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the Uganda Christian University Digital Institutional Repository?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Uganda Christian University Digital Institutional Repository is a platform for preserving and providing access to UCU’s scholarly output, supporting open access, and improving long-term visibility of research and academic works."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I search for items in the repository?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use the site search to find items by title, author, keywords, or subject. You can refine results using filters such as date, type, and collections."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I share an item page?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Each item has a stable URL you can copy and share. Item pages also include rich metadata for better previews on social platforms and improved indexing."
+              }
+            }
+          ]
         }
       ]
     }

@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ViewMode } from '../../../../core/shared/view-mode.model';
 import { ContextMenuComponent } from '../../../../shared/context-menu/context-menu.component';
 import { MetadataFieldWrapperComponent } from '../../../../shared/metadata-field-wrapper/metadata-field-wrapper.component';
+import { ThemedBadgesComponent } from '../../../../shared/object-collection/shared/badges/themed-badges.component';
 import { listableObjectComponent } from '../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
@@ -17,6 +18,7 @@ import { ThemedMediaViewerComponent } from '../../../media-viewer/themed-media-v
 import { MiradorViewerComponent } from '../../../mirador-viewer/mirador-viewer.component';
 import { ThemedFileSectionComponent } from '../../field-components/file-section/themed-file-section.component';
 import { ItemPageAbstractFieldComponent } from '../../field-components/specific-field/abstract/item-page-abstract-field.component';
+import { ItemPageCcLicenseFieldComponent } from '../../field-components/specific-field/cc-license/item-page-cc-license-field.component';
 import { ItemPageDateFieldComponent } from '../../field-components/specific-field/date/item-page-date-field.component';
 import { GenericItemPageFieldComponent } from '../../field-components/specific-field/generic/generic-item-page-field.component';
 import { GeospatialItemPageFieldComponent } from '../../field-components/specific-field/geospatial/geospatial-item-page-field.component';
@@ -43,12 +45,14 @@ import { ItemComponent } from '../shared/item.component';
     GenericItemPageFieldComponent,
     GeospatialItemPageFieldComponent,
     ItemPageAbstractFieldComponent,
+    ItemPageCcLicenseFieldComponent,
     ItemPageDateFieldComponent,
     ItemPageUriFieldComponent,
     MetadataFieldWrapperComponent,
     MiradorViewerComponent,
     RelatedItemsComponent,
     RouterLink,
+    ThemedBadgesComponent,
     ThemedFileSectionComponent,
     ThemedItemPageTitleFieldComponent,
     ThemedMediaViewerComponent,

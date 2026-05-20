@@ -62,12 +62,47 @@ export const accessStatusBadgeConfig = {
       color: '#dc3545',
       priority: 7
     },
+    'restricted access': {
+      label: 'Restricted Access',
+      badgeClass: 'badge-dark',
+      icon: 'fa-ban',
+      color: '#343a40',
+      priority: 8
+    },
     'restricted': {
       label: 'Restricted',
       badgeClass: 'badge-dark',
       icon: 'fa-ban',
       color: '#343a40',
       priority: 8
+    },
+    'metadata only': {
+      label: 'Metadata Only',
+      badgeClass: 'badge-secondary',
+      icon: 'fa-info-circle',
+      color: '#6c757d',
+      priority: 9
+    },
+    'indefinitely restricted': {
+      label: 'Indefinitely Restricted',
+      badgeClass: 'badge-dark',
+      icon: 'fa-lock-open',
+      color: '#343a40',
+      priority: 10
+    },
+    'closed access': {
+      label: 'Closed Access',
+      badgeClass: 'badge-dark',
+      icon: 'fa-lock',
+      color: '#343a40',
+      priority: 11
+    },
+    'unknown': {
+      label: 'Unknown',
+      badgeClass: 'badge-secondary',
+      icon: 'fa-question-circle',
+      color: '#6c757d',
+      priority: 12
     }
   },
 

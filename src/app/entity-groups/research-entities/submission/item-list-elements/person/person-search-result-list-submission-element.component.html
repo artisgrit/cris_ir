@@ -4,7 +4,7 @@
       @if (linkType !== linkTypes.None) {
         <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
           [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null" class="dont-break-out">
-          <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
+          <ds-thumbnail [thumbnail]="thumbnail$ | async"
             [defaultImage]="'assets/images/person-placeholder.svg'"
             [alt]="'thumbnail.person.alt'"
             [placeholder]="'thumbnail.person.placeholder'">
@@ -13,7 +13,7 @@
       }
       @if (linkType === linkTypes.None) {
         <span class="dont-break-out">
-          <ds-thumbnail [thumbnail]="dso?.thumbnail | async"
+          <ds-thumbnail [thumbnail]="thumbnail$ | async"
             [defaultImage]="'assets/images/person-placeholder.svg'"
             [alt]="'thumbnail.person.alt'"
             [placeholder]="'thumbnail.person.placeholder'">

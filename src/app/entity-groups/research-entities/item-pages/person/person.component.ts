@@ -1,8 +1,17 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap, take } from 'rxjs/operators';
 
+import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
+import { FindListOptions } from '../../../../core/data/find-list-options.model';
+import { Bitstream } from '../../../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../../../core/shared/bitstream-format.model';
+import { getFirstCompletedRemoteData, getPaginatedListPayload, getRemoteDataPayload } from '../../../../core/shared/operators';
+import { RouteService } from '../../../../core/services/route.service';
 import { ViewMode } from '../../../../core/shared/view-mode.model';
 import { GenericItemPageFieldComponent } from '../../../../item-page/simple/field-components/specific-field/generic/generic-item-page-field.component';
 import { ThemedItemPageTitleFieldComponent } from '../../../../item-page/simple/field-components/specific-field/title/themed-item-page-field.component';
@@ -13,6 +22,7 @@ import { ContextMenuComponent } from '../../../../shared/context-menu/context-me
 import { MetadataFieldWrapperComponent } from '../../../../shared/metadata-field-wrapper/metadata-field-wrapper.component';
 import { listableObjectComponent } from '../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../shared/results-back-button/themed-results-back-button.component';
+import { followLink } from '../../../../shared/utils/follow-link-config.model';
 import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
 
 @listableObjectComponent('Person', ViewMode.StandalonePage)
@@ -38,4 +48,89 @@ import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail
  * The component for displaying metadata and relations of an item of the type Person
  */
 export class PersonComponent extends ItemComponent {
+
+  /**
+   * Thumbnail for the Person's profile picture.
+   * Prefer the item's thumbnail, but fall back to the first ORIGINAL image bitstream.
+   */
+  thumbnail$: Observable<Bitstream> = of(null);
+
+  constructor(
+    protected routeService: RouteService,
+    protected router: Router,
+    private bitstreamDataService: BitstreamDataService,
+  ) {
+    super(routeService, router);
+  }
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.thumbnail$ = this.getThumbnail().pipe(take(1));
+  }
+
+  private getThumbnail(): Observable<Bitstream> {
+    const itemThumbnail$ = this.object?.thumbnail?.pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload(),
+      take(1),
+      catchError(() => of(null)),
+    ) ?? of(null);
+
+    return itemThumbnail$.pipe(
+      switchMap((itemThumbnail: Bitstream) => {
+        if (itemThumbnail) {
+          return of(itemThumbnail);
+        }
+
+        const options = Object.assign(new FindListOptions(), { elementsPerPage: 1, currentPage: 1 });
+        return this.bitstreamDataService.showableByItem(
+          this.object.uuid,
+          'ORIGINAL',
+          [],
+          options,
+          true,
+          true,
+          followLink('thumbnail', { isOptional: true }),
+          followLink('format', { isOptional: true }),
+        ).pipe(
+          getFirstCompletedRemoteData(),
+          getRemoteDataPayload(),
+          getPaginatedListPayload(),
+          map((page: Bitstream[]) => page?.[0] ?? null),
+          switchMap((original: Bitstream) => {
+            if (!original) {
+              return of(null);
+            }
+
+            return original.format?.pipe(
+              getFirstCompletedRemoteData(),
+              map((formatRD) => formatRD?.payload as BitstreamFormat),
+              map((format: BitstreamFormat) => (format?.mimetype ?? '').toLowerCase().startsWith('image/')),
+              switchMap((isImage) => {
+                if (!isImage) {
+                  return of(null);
+                }
+
+                const derivedThumb$ = original.thumbnail?.pipe(
+                  getFirstCompletedRemoteData(),
+                  getRemoteDataPayload(),
+                  take(1),
+                  catchError(() => of(null)),
+                ) ?? of(null);
+
+                return derivedThumb$.pipe(
+                  map((derived) => derived ?? original),
+                );
+              }),
+              take(1),
+              catchError(() => of(null)),
+            ) ?? of(null);
+          }),
+          take(1),
+          catchError(() => of(null)),
+        );
+      }),
+      catchError(() => of(null)),
+    );
+  }
 }

@@ -12,14 +12,17 @@ import {
   of,
 } from 'rxjs';
 import {
+  catchError,
   map,
   switchMap,
+  take,
 } from 'rxjs/operators';
 
 import { BitstreamDataService } from '../../../../../../../core/data/bitstream-data.service';
 import { PaginatedList } from '../../../../../../../core/data/paginated-list.model';
 import { LayoutField } from '../../../../../../../core/layout/models/box.model';
 import { Bitstream } from '../../../../../../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../../../../../../core/shared/bitstream-format.model';
 import { getDefaultImageUrlByEntityType } from '../../../../../../../core/shared/image.utils';
 import { Item } from '../../../../../../../core/shared/item.model';
 import { getFirstCompletedRemoteData } from '../../../../../../../core/shared/operators';
@@ -90,10 +93,10 @@ export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponen
       map(([_, bitstreamList]: [string, PaginatedList<Bitstream>]) => bitstreamList.page),
       switchMap((filteredBitstreams: Bitstream[]) => {
         if (filteredBitstreams.length > 0) {
-          if (isEmpty(filteredBitstreams[0].thumbnail)) {
-            return of(null);
-          } else {
-            return filteredBitstreams[0].thumbnail.pipe(
+          const first = filteredBitstreams[0];
+
+          if (isNotEmpty(first.thumbnail)) {
+            return first.thumbnail.pipe(
               getFirstCompletedRemoteData(),
               map((thumbnailRD) => {
                 if (thumbnailRD.hasSucceeded && isNotEmpty(thumbnailRD.payload)) {
@@ -104,6 +107,17 @@ export class ThumbnailRenderingComponent extends BitstreamRenderingModelComponen
               }),
             );
           }
+
+          // Fallback: if no derived thumbnail is available but the ORIGINAL bitstream is an image,
+          // render the bitstream itself as the thumbnail (e.g. Person profile pictures).
+          return first.format?.pipe(
+            getFirstCompletedRemoteData(),
+            map((formatRD) => formatRD?.payload as BitstreamFormat),
+            map((format: BitstreamFormat) => (format?.mimetype ?? '').toLowerCase().startsWith('image/')),
+            map((isImage) => isImage ? first : null),
+            take(1),
+            catchError(() => of(null)),
+          ) ?? of(null);
         } else {
           return of(null);
         }

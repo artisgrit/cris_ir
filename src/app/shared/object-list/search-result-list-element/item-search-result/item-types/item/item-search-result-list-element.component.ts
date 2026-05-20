@@ -43,6 +43,7 @@ import { BitstreamDataService } from '../../../../../../core/data/bitstream-data
 import { FindListOptions } from '../../../../../../core/data/find-list-options.model';
 import { Context } from '../../../../../../core/shared/context.model';
 import { Bitstream } from '../../../../../../core/shared/bitstream.model';
+import { BitstreamFormat } from '../../../../../../core/shared/bitstream-format.model';
 import { Item } from '../../../../../../core/shared/item.model';
 import { MetadataValueFilter } from '../../../../../../core/shared/metadata.models';
 import { PLACEHOLDER_VALUE } from '../../../../../../core/shared/metadata.utils';
@@ -223,17 +224,43 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
           true,
           true,
           followLink('thumbnail', { isOptional: true }),
+          followLink('format', { isOptional: true }),
         ).pipe(
           getFirstCompletedRemoteData(),
           getRemoteDataPayload(),
           getPaginatedListPayload(),
           map((page: Bitstream[]) => page?.[0] ?? null),
-          switchMap((original: Bitstream) => original?.thumbnail?.pipe(
-            getFirstCompletedRemoteData(),
-            getRemoteDataPayload(),
-            take(1),
-            catchError(() => of(null)),
-          ) ?? of(null)),
+          switchMap((original: Bitstream) => {
+            if (!original) {
+              return of(null);
+            }
+
+            const derivedThumb$ = original.thumbnail?.pipe(
+              getFirstCompletedRemoteData(),
+              getRemoteDataPayload(),
+              take(1),
+              catchError(() => of(null)),
+            ) ?? of(null);
+
+            return derivedThumb$.pipe(
+              switchMap((derived: Bitstream) => {
+                if (derived) {
+                  return of(derived);
+                }
+
+                // If the ORIGINAL bitstream is itself an image, use it as a thumbnail fallback
+                // (e.g. Person profile pictures stored as an image with no derived thumbnail).
+                return original.format?.pipe(
+                  getFirstCompletedRemoteData(),
+                  map((formatRD) => formatRD?.payload as BitstreamFormat),
+                  map((format: BitstreamFormat) => (format?.mimetype ?? '').toLowerCase().startsWith('image/')),
+                  map((isImage) => isImage ? original : null),
+                  take(1),
+                  catchError(() => of(null)),
+                ) ?? of(null);
+              }),
+            );
+          }),
           take(1),
           catchError(() => of(null)),
         );

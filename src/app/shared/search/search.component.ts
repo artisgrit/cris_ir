@@ -676,6 +676,7 @@ export class SearchComponent implements OnDestroy, OnInit {
     if (this.showThumbnails) {
       followLinks = [
         followLink<Item>('thumbnail', { isOptional: true }),
+        followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: this.appConfig.item.showAccessStatuses }),
         followLink<SubmissionObject>('item', { isOptional: true },
           followLink<Item>('thumbnail', { isOptional: true }),
           followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: this.appConfig.item.showAccessStatuses }),
@@ -683,6 +684,7 @@ export class SearchComponent implements OnDestroy, OnInit {
       ];
     } else {
       followLinks = [
+        followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: this.appConfig.item.showAccessStatuses }),
         followLink<SubmissionObject>('item', { isOptional: true },
           followLink<Item>('accessStatus', { isOptional: true, shouldEmbed: this.appConfig.item.showAccessStatuses }),
         ) as any,

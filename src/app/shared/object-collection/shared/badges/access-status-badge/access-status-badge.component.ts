@@ -101,8 +101,8 @@ export class AccessStatusBadgeComponent implements OnDestroy, OnInit {
     }
     this.accessStatus$ = this.object.accessStatus.pipe(
       getFirstSucceededRemoteDataPayload(),
-      map((accessStatus: AccessStatusObject) => hasValue(accessStatus.status) ? accessStatus.status : 'unknown'),
-      map((status: string) => `access-status.${status.toLowerCase()}.listelement.badge`),
+      map((accessStatus: AccessStatusObject) => this.normalizeStatus(accessStatus?.status)),
+      map((status: string) => `access-status.${status}.listelement.badge`),
       catchError(() => of('access-status.unknown.listelement.badge')),
     );
     // stylesheet based on the access status value
@@ -132,5 +132,32 @@ export class AccessStatusBadgeComponent implements OnDestroy, OnInit {
     this.accessStatus$ = this.embargoDate$.pipe(
       map(date => hasValue(date) ? 'embargo.listelement.badge' : null),
     );
+  }
+
+  /**
+   * Normalize backend access status values to match i18n keys.
+   * Backend installations may use variants like OPEN_ACCESS, METADATA_ONLY, etc.
+   */
+  private normalizeStatus(status: string): string {
+    if (!hasValue(status)) {
+      return 'unknown';
+    }
+    const normalized = status.toLowerCase().trim();
+    switch (normalized) {
+      case 'open_access':
+      case 'openaccess':
+      case 'open':
+        return 'open.access';
+      case 'restricted_access':
+      case 'restrictedaccess':
+        return 'restricted';
+      case 'metadata_only':
+      case 'metadataonly':
+        return 'metadata.only';
+      case 'embargoed':
+        return 'embargo';
+      default:
+        return normalized.replace(/_/g, '.');
+    }
   }
 }

@@ -22,10 +22,14 @@ import {
 import {
   combineLatest,
   Observable,
+  of,
 } from 'rxjs';
 import {
+  catchError,
   filter,
   map,
+  shareReplay,
+  switchMap,
   take,
 } from 'rxjs/operators';
 import { OrejimeService } from 'src/app/shared/cookies/orejime.service';
@@ -60,6 +64,7 @@ import { TruncatableService } from '../../../../../truncatable/truncatable.servi
 import { TruncatablePartComponent } from '../../../../../truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../../utils/escape-html.pipe';
 import { VarDirective } from '../../../../../utils/var.directive';
+import { followLink } from '../../../../../utils/follow-link-config.model';
 import { MetricBadgesComponent } from '../../../../metric-badges/metric-badges.component';
 import { MetricDonutsComponent } from '../../../../metric-donuts/metric-donuts.component';
 import { AdditionalMetadataComponent } from '../../../additional-metadata/additional-metadata.component';
@@ -107,6 +112,12 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   itemPageRoute: string;
   openPdfInApp$ = this.accessibilitySettingsService.get('pdfViewerOpenInApp', 'true').pipe(map(v => v !== 'false'));
   pdfPreviewSrc = null;
+
+  /**
+   * Thumbnail to display in search results.
+   * Prefer the item's thumbnail, but fall back to the same bitstream thumbnail connection used on the item page file section.
+   */
+  thumbnail$: Observable<Bitstream> = of(null);
   showBrandedCover = true;
   citationStyle = 'APA';
   readonly citationStyles = [
@@ -148,6 +159,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   ngOnInit(): void {
     super.ngOnInit();
     this.itemPageRoute = getItemPageRoute(this.dso);
+    this.thumbnail$ = this.getThumbnail().pipe(shareReplay({ bufferSize: 1, refCount: true }));
   }
 
   /**
@@ -190,6 +202,49 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    */
   showSettings() {
     this.orejimeService.showSettings();
+  }
+
+  private getThumbnail(): Observable<Bitstream> {
+    const itemThumbnail$ = this.dso?.thumbnail?.pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload(),
+      take(1),
+      catchError(() => of(null)),
+    ) ?? of(null);
+
+    return itemThumbnail$.pipe(
+      switchMap((itemThumbnail: Bitstream) => {
+        if (itemThumbnail) {
+          return of(itemThumbnail);
+        }
+
+        // Fallback: fetch the first showable ORIGINAL bitstream and use its thumbnail,
+        // mirroring the item page file section behavior.
+        const options = Object.assign(new FindListOptions(), { elementsPerPage: 1, currentPage: 1 });
+        return this.bitstreamDataService.showableByItem(
+          this.dso.uuid,
+          'ORIGINAL',
+          [],
+          options,
+          true,
+          true,
+          followLink('thumbnail', { isOptional: true }),
+        ).pipe(
+          getFirstCompletedRemoteData(),
+          getRemoteDataPayload(),
+          getPaginatedListPayload(),
+          map((page: Bitstream[]) => page?.[0] ?? null),
+          switchMap((original: Bitstream) => original?.thumbnail?.pipe(
+            getFirstCompletedRemoteData(),
+            getRemoteDataPayload(),
+            take(1),
+            catchError(() => of(null)),
+          ) ?? of(null)),
+          take(1),
+          catchError(() => of(null)),
+        );
+      }),
+    );
   }
 
   openFirstPdf(modalContent: any) {

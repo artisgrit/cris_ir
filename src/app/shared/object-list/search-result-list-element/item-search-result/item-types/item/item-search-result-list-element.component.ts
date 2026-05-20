@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
   differenceInDays,
@@ -33,15 +32,12 @@ import {
   take,
 } from 'rxjs/operators';
 import { OrejimeService } from 'src/app/shared/cookies/orejime.service';
-import { PdfViewerService } from 'src/app/shared/pdf-viewer/pdf-viewer.service';
 
 import {
   APP_CONFIG,
   AppConfig,
 } from '../../../../../../../config/app-config.interface';
 import { environment } from '../../../../../../../environments/environment';
-import { AccessibilitySettingsService } from '../../../../../../accessibility/accessibility-settings.service';
-import { getBitstreamDownloadRoute } from '../../../../../../app-routing-paths';
 import { DSONameService } from '../../../../../../core/breadcrumbs/dso-name.service';
 import { BitstreamDataService } from '../../../../../../core/data/bitstream-data.service';
 import { FindListOptions } from '../../../../../../core/data/find-list-options.model';
@@ -111,14 +107,14 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
    * Route to the item's page
    */
   itemPageRoute: string;
-  openPdfInApp$ = this.accessibilitySettingsService.get('pdfViewerOpenInApp', 'true').pipe(map(v => v !== 'false'));
-  pdfPreviewSrc = null;
 
   /**
    * Thumbnail to display in search results.
    * Prefer the item's thumbnail, but fall back to the same bitstream thumbnail connection used on the item page file section.
    */
   thumbnail$: Observable<Bitstream> = of(null);
+
+  // Citation helpers (used by the list element / preview UX)
   showBrandedCover = true;
   citationStyle = 'APA';
   readonly citationStyles = [
@@ -148,10 +144,7 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
     protected truncatableService: TruncatableService,
     public dsoNameService: DSONameService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    private accessibilitySettingsService: AccessibilitySettingsService,
     private bitstreamDataService: BitstreamDataService,
-    private pdfViewerService: PdfViewerService,
-    private modalService: NgbModal,
     @Optional() private orejimeService?: OrejimeService,
   ) {
     super(truncatableService, dsoNameService, appConfig);
@@ -249,29 +242,8 @@ export class ItemSearchResultListElementComponent extends SearchResultListElemen
   }
 
   openFirstPdf(modalContent: any) {
-    this.openPdfInApp$.pipe(take(1)).subscribe((enabled) => {
-      if (!enabled) {
-        return;
-      }
-      const options = Object.assign(new FindListOptions(), { elementsPerPage: 20, currentPage: 1 });
-      this.bitstreamDataService.showableByItem(this.dso.uuid, 'ORIGINAL', [], options).pipe(
-        getFirstCompletedRemoteData(),
-        getRemoteDataPayload(),
-        getPaginatedListPayload(),
-        map((page: Bitstream[]) => page?.find(b => (this.dsoNameService.getName(b) ?? '').toLowerCase().endsWith('.pdf'))),
-        take(1),
-      ).subscribe((pdfBitstream) => {
-        if (!pdfBitstream) {
-          return;
-        }
-        const url = getBitstreamDownloadRoute(pdfBitstream);
-        const contentUrl = this.pdfViewerService.toApiContentUrl(url);
-        this.pdfViewerService.toSafePdfUrlWithAuth(contentUrl).pipe(take(1)).subscribe((safeUrl) => {
-          this.pdfPreviewSrc = safeUrl;
-          this.modalService.open(modalContent, { size: 'xl', scrollable: true, centered: true });
-        });
-      });
-    });
+    // PDF preview removed
+    void modalContent;
   }
 
   getPreviewItemUrl(): string {

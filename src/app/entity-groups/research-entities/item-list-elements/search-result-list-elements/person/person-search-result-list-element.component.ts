@@ -26,13 +26,11 @@ import { MetricBadgesComponent } from '../../../../../shared/object-list/metric-
 import { MetricDonutsComponent } from '../../../../../shared/object-list/metric-donuts/metric-donuts.component';
 import { AdditionalMetadataComponent } from '../../../../../shared/object-list/search-result-list-element/additional-metadata/additional-metadata.component';
 import { ItemSearchResultListElementComponent } from '../../../../../shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
-import { PdfViewerService } from '../../../../../shared/pdf-viewer/pdf-viewer.service';
 import { TruncatableComponent } from '../../../../../shared/truncatable/truncatable.component';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../../shared/utils/escape-html.pipe';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement)
 @Component({
@@ -63,20 +61,14 @@ export class PersonSearchResultListElementComponent extends ItemSearchResultList
     protected truncatableService: TruncatableService,
     public dsoNameService: DSONameService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
-    accessibilitySettingsService: AccessibilitySettingsService,
     bitstreamDataService: BitstreamDataService,
-    pdfViewerService: PdfViewerService,
-    modalService: NgbModal,
     @Optional() orejimeService?: OrejimeService,
   ) {
     super(
       truncatableService,
       dsoNameService,
       appConfig,
-      accessibilitySettingsService,
       bitstreamDataService,
-      pdfViewerService,
-      modalService,
       orejimeService,
     );
   }

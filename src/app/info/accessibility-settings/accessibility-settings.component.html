@@ -146,21 +146,6 @@
 
     <hr class="my-4" />
 
-    <h3 class="h5 mb-3">PDF viewer</h3>
-
-    <div class="mb-3 row">
-      <label class="col-sm-4 col-form-label">
-        Open PDFs inside the system
-      </label>
-
-      <div class="col-sm-4">
-        <ds-switch
-          [options]="binarySwitchOptions"
-          [(selectedValue)]="formValues.pdfViewerOpenInApp">
-        </ds-switch>
-      </div>
-    </div>
-
     <div role="group">
       <button type="submit" (click)="saveSettings()" class="btn btn-primary me-2">
         {{ 'info.accessibility-settings.submit' | translate }}

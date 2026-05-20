@@ -56,7 +56,7 @@ export const ACCESSIBILITY_SETTINGS_METADATA_KEY = 'dspace.accessibility.setting
  * When adding new settings, make sure to add the new setting to the accessibility-settings component form.
  * The converter methods to convert from stored format to form format (and vice-versa) need to be updated as well.
  */
-export const accessibilitySettingKeys = ['notificationTimeOut', 'liveRegionTimeOut', 'screenReaderEnabled', 'screenReaderRate', 'screenReaderLanguage', 'screenReaderVoice', 'pdfViewerOpenInApp'] as const;
+export const accessibilitySettingKeys = ['notificationTimeOut', 'liveRegionTimeOut', 'screenReaderEnabled', 'screenReaderRate', 'screenReaderLanguage', 'screenReaderVoice'] as const;
 
 /**
  * Type representing the possible accessibility settings
@@ -84,7 +84,6 @@ export interface AccessibilitySettingsFormValues {
   screenReaderRate: string,
   screenReaderLanguage: string,
   screenReaderVoice: string,
-  pdfViewerOpenInApp: boolean,
 }
 
 /**
@@ -316,8 +315,6 @@ export class AccessibilitySettingsService {
         return '1';
       case 'screenReaderLanguage':
         return 'en-US';
-      case 'pdfViewerOpenInApp':
-        return 'true';
       default:
         return '';
     }
@@ -335,7 +332,6 @@ export class AccessibilitySettingsService {
       screenReaderRate: settings.screenReaderRate,
       screenReaderLanguage: settings.screenReaderLanguage,
       screenReaderVoice: settings.screenReaderVoice,
-      pdfViewerOpenInApp: settings.pdfViewerOpenInApp ? 'true' : 'false',
     };
 
     // When the user enables the timeout but does not change the timeout duration from 0,
@@ -360,7 +356,6 @@ export class AccessibilitySettingsService {
       screenReaderRate: (settings.screenReaderRate ?? this.getDefaultValue('screenReaderRate')),
       screenReaderLanguage: (settings.screenReaderLanguage ?? this.getDefaultValue('screenReaderLanguage')),
       screenReaderVoice: (settings.screenReaderVoice ?? ''),
-      pdfViewerOpenInApp: (settings.pdfViewerOpenInApp ?? this.getDefaultValue('pdfViewerOpenInApp')) !== 'false',
     };
   }
 
@@ -382,7 +377,6 @@ export class AccessibilitySettingsService {
       case 'screenReaderLanguage':
       case 'screenReaderVoice':
       case 'screenReaderEnabled':
-      case 'pdfViewerOpenInApp':
         return true;
       default:
         throw new Error(`Unhandled accessibility setting during validity check: ${setting}`);

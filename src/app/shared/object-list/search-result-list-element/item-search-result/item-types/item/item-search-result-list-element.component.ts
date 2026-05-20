@@ -33,6 +33,7 @@ import {
   take,
 } from 'rxjs/operators';
 import { OrejimeService } from 'src/app/shared/cookies/orejime.service';
+import { PdfViewerService } from 'src/app/shared/pdf-viewer/pdf-viewer.service';
 
 import {
   APP_CONFIG,

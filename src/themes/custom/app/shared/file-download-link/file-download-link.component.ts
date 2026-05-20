@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ThemedAccessStatusBadgeComponent } from 'src/app/shared/object-collection/shared/badges/access-status-badge/themed-access-status-badge.component';
-import { InlinePdfViewerComponent } from 'src/app/shared/pdf-viewer/inline-pdf-viewer/inline-pdf-viewer.component';
 
 import { FileDownloadLinkComponent as BaseComponent } from '../../../../../app/shared/file-download-link/file-download-link.component';
 
@@ -22,7 +21,6 @@ import { FileDownloadLinkComponent as BaseComponent } from '../../../../../app/s
     NgClass,
     NgTemplateOutlet,
     RouterLink,
-    InlinePdfViewerComponent,
     ThemedAccessStatusBadgeComponent,
     TranslateModule,
   ],

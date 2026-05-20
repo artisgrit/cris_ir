@@ -55,8 +55,6 @@ import { ThemedBadgesComponent } from '../../../../../object-collection/shared/b
 import { InWorkflowStatisticsComponent } from '../../../../../object-collection/shared/in-workflow-statistics/in-workflow-statistics.component';
 import { ItemSearchResult } from '../../../../../object-collection/shared/item-search-result.model';
 import { listableObjectComponent } from '../../../../../object-collection/shared/listable-object/listable-object.decorator';
-import { InlinePdfViewerComponent } from '../../../../../pdf-viewer/inline-pdf-viewer/inline-pdf-viewer.component';
-import { PdfViewerService } from '../../../../../pdf-viewer/pdf-viewer.service';
 import { TruncatableComponent } from '../../../../../truncatable/truncatable.component';
 import { TruncatableService } from '../../../../../truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../truncatable/truncatable-part/truncatable-part.component';
@@ -80,7 +78,6 @@ import { SearchResultListElementComponent } from '../../../search-result-list-el
     EscapeHtmlPipe,
     FormsModule,
     InWorkflowStatisticsComponent,
-    InlinePdfViewerComponent,
     MetadataLinkViewComponent,
     MetricBadgesComponent,
     MetricDonutsComponent,

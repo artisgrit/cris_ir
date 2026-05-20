@@ -49,7 +49,12 @@
         "peerreviewed": "Peer Reviewed",
         "postprint": "Post-Print",
         "controlledaccess": "Controlled Access",
-        "restricted": "Restricted"
+        "restricted": "Restricted",
+        "restrictedaccess": "Restricted Access",
+        "metadataonly": "Metadata Only",
+        "indefinitelyrestricted": "Indefinitely Restricted",
+        "closedaccess": "Closed Access",
+        "unknown": "Unknown"
       }
     }
   },
@@ -70,7 +75,13 @@
       "published": "Published",
       "peerreviewed": "Peer Reviewed",
       "postprint": "Post-Print",
-      "controlledaccess": "Controlled Access"
+      "controlledaccess": "Controlled Access",
+      "restricted": "Restricted",
+      "restrictedaccess": "Restricted Access",
+      "metadataonly": "Metadata Only",
+      "indefinitelyrestricted": "Indefinitely Restricted",
+      "closedaccess": "Closed Access",
+      "unknown": "Unknown"
     }
   }
 }

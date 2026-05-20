@@ -4,16 +4,6 @@
 <div class="file-download-row">
   @let canDownload = (canDownload$ | async);
   @let canDownloadWithToken = (canDownloadWithToken$ | async);
-  @if ((openPdfInApp$ | async) && isPdfBitstream() && ((canDownload === true) || (canDownloadWithToken === true))) {
-    <button
-      class="pdf-preview-btn"
-      type="button"
-      (click)="openPdfPreview(pdfPreviewModal, canDownload === true, canDownloadWithToken === true)"
-      aria-label="Preview PDF"
-      title="Preview PDF">
-      <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
-    </button>
-  }
 
   <a [routerLink]="(bitstreamPath$| async)?.routerLink" class="d-block dont-break-out mb-1 flex-grow-1"
     [queryParams]="(bitstreamPath$| async)?.queryParams"
@@ -43,16 +33,6 @@
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </a>
 </div>
-
-<ng-template #pdfPreviewModal let-modal>
-  <div class="modal-header">
-    <h2 class="modal-title h5 mb-0">{{ dsoNameService.getName(bitstream) }}</h2>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
-  </div>
-  <div class="modal-body">
-    <ds-inline-pdf-viewer [src]="pdfPreviewSrc" [title]="dsoNameService.getName(bitstream)"></ds-inline-pdf-viewer>
-  </div>
-</ng-template>
 
 <ng-template #content>
   <ng-content></ng-content>

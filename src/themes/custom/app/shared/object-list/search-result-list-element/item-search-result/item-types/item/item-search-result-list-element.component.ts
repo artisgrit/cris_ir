@@ -18,7 +18,6 @@ import { MetricBadgesComponent } from '../../../../../../../../../app/shared/obj
 import { MetricDonutsComponent } from '../../../../../../../../../app/shared/object-list/metric-donuts/metric-donuts.component';
 import { AdditionalMetadataComponent } from '../../../../../../../../../app/shared/object-list/search-result-list-element/additional-metadata/additional-metadata.component';
 import { ItemSearchResultListElementComponent as BaseComponent } from '../../../../../../../../../app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
-import { InlinePdfViewerComponent } from '../../../../../../../../../app/shared/pdf-viewer/inline-pdf-viewer/inline-pdf-viewer.component';
 import { TruncatableComponent } from '../../../../../../../../../app/shared/truncatable/truncatable.component';
 import { TruncatablePartComponent } from '../../../../../../../../../app/shared/truncatable/truncatable-part/truncatable-part.component';
 import { EscapeHtmlPipe } from '../../../../../../../../../app/shared/utils/escape-html.pipe';
@@ -38,7 +37,6 @@ import { ThemedThumbnailComponent } from '../../../../../../../../../app/thumbna
     EscapeHtmlPipe,
     FormsModule,
     InWorkflowStatisticsComponent,
-    InlinePdfViewerComponent,
     MetadataLinkViewComponent,
     MetricBadgesComponent,
     MetricDonutsComponent,

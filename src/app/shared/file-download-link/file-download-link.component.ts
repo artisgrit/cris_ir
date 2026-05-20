@@ -51,8 +51,6 @@ import {
   hasValue,
   isNotEmpty,
 } from '../empty.util';
-import { InlinePdfViewerComponent } from '../pdf-viewer/inline-pdf-viewer/inline-pdf-viewer.component';
-import { PdfViewerService } from '../pdf-viewer/pdf-viewer.service';
 import { ThemedAccessStatusBadgeComponent } from '../object-collection/shared/badges/access-status-badge/themed-access-status-badge.component';
 
 @Component({
@@ -64,7 +62,6 @@ import { ThemedAccessStatusBadgeComponent } from '../object-collection/shared/ba
     NgClass,
     NgTemplateOutlet,
     RouterLink,
-    InlinePdfViewerComponent,
     ThemedAccessStatusBadgeComponent,
     TranslateModule,
   ],
@@ -105,7 +102,7 @@ export class FileDownloadLinkComponent implements OnInit {
    */
   @Input() showIcon = false;
 
-  itemRequest: ItemRequest;
+   itemRequest: ItemRequest;
 
   bitstreamPath$: Observable<{
     routerLink: string,
@@ -115,22 +112,16 @@ export class FileDownloadLinkComponent implements OnInit {
   canDownload$: Observable<boolean>;
   canDownloadWithToken$: Observable<boolean>;
   canRequestACopy$: Observable<boolean>;
-  openPdfInApp$: Observable<boolean>;
-
-  pdfPreviewSrc = null;
 
   /**
-   * Whether or not the user can request a copy of the item
-   * based on the configuration property `request.item.type`.
-   */
+    * Whether or not the user can request a copy of the item
+    * based on the configuration property `request.item.type`.
+    */
   public canRequestItemCopy$: Observable<boolean>;
 
   constructor(
     private authorizationService: AuthorizationDataService,
     private configurationService: ConfigurationDataService,
-    private accessibilitySettingsService: AccessibilitySettingsService,
-    private pdfViewerService: PdfViewerService,
-    private modalService: NgbModal,
     public dsoNameService: DSONameService,
     private route: ActivatedRoute,
     private translateService: TranslateService,
@@ -138,11 +129,6 @@ export class FileDownloadLinkComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.openPdfInApp$ = this.accessibilitySettingsService.get('pdfViewerOpenInApp', 'true').pipe(
-      map(v => v !== 'false'),
-      shareReplay({ refCount: false, bufferSize: 1 }),
-    );
-
     if (this.enableRequestACopy) {
       // Obtain item request data from the route snapshot
       this.itemRequest = this.route.snapshot.data.itemRequest;
@@ -170,32 +156,6 @@ export class FileDownloadLinkComponent implements OnInit {
       this.canDownload$ = of(true);
       this.canRequestItemCopy$ = of(false);
     }
-  }
-
-  isPdfBitstream(): boolean {
-    const name = this.dsoNameService.getName(this.bitstream) ?? '';
-    return name.toLowerCase().endsWith('.pdf');
-  }
-
-  openPdfPreview(modalContent: any, canDownload: boolean, canDownloadWithToken: boolean) {
-    if (!this.isPdfBitstream() || (!canDownload && !canDownloadWithToken)) {
-      return;
-    }
-
-    const routeInfo = this.getBitstreamPath(canDownload, canDownloadWithToken, false);
-    const url = this.buildUrl(routeInfo.routerLink, routeInfo.queryParams);
-    const contentUrl = this.pdfViewerService.toApiContentUrl(url);
-    this.pdfViewerService.toSafePdfUrlWithAuth(contentUrl).pipe(take(1)).subscribe((safeUrl) => {
-      this.pdfPreviewSrc = safeUrl;
-      this.modalService.open(modalContent, { size: 'xl', scrollable: true, centered: true });
-    });
-  }
-
-  private buildUrl(routerLink: string, queryParams: any): string {
-    const qs = queryParams && Object.keys(queryParams).length > 0
-      ? '?' + Object.entries(queryParams).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`).join('&')
-      : '';
-    return `${routerLink}${qs}`;
   }
 
   /**

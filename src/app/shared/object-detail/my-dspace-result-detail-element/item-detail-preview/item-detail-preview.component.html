@@ -46,8 +46,37 @@
                                           [separator]="separator"
                                           [placeholder]="('mydspace.results.no-authors' | translate)">
             </ds-item-detail-preview-field>
+            <ds-item-detail-preview-field [item]="item"
+                                          [object]="object"
+                                          [label]="('item.page.resource-type' | translate)"
+                                          [metadata]="'dc.type'"
+                                          [separator]="separator"
+                                          [placeholder]="('mydspace.results.no-type' | translate)">
+            </ds-item-detail-preview-field>
+            <ds-item-detail-preview-field [item]="item"
+                                          [object]="object"
+                                          [label]="('item.page.publication' | translate)"
+                                          [metadata]="['dc.relation.ispartof', 'dc.source']"
+                                          [separator]="separator"
+                                          [placeholder]="('mydspace.results.no-publication' | translate)">
+            </ds-item-detail-preview-field>
+            <ds-item-detail-preview-field [item]="item"
+                                          [object]="object"
+                                          [label]="('item.page.rights' | translate)"
+                                          [metadata]="'dc.rights'"
+                                          [separator]="separator"
+                                          [placeholder]="('mydspace.results.no-rights' | translate)">
+            </ds-item-detail-preview-field>
           </div>
           <div class="col-12 col-md-6">
+            <ds-item-detail-preview-field [item]="item"
+                                          [object]="object"
+                                          [label]="('item.page.citation' | translate)"
+                                          [metadata]="'dc.identifier.citation'"
+                                          [escapeMetadataHTML]="false"
+                                          [separator]="separator"
+                                          [placeholder]="('mydspace.results.no-citation' | translate)">
+            </ds-item-detail-preview-field>
             <ds-item-detail-preview-field [item]="item"
                                           [object]="object"
                                           [label]="('item.page.abstract' | translate)"
@@ -58,10 +87,24 @@
             </ds-item-detail-preview-field>
             <ds-item-detail-preview-field [item]="item"
                                           [object]="object"
-                                          [label]="('item.page.uri' | translate)"
-                                          [metadata]="'dc.identifier.uri'"
+                                          [label]="('item.page.identifier' | translate)"
+                                          [metadata]="['dc.identifier', 'dc.identifier.doi', 'dc.identifier.uri']"
                                           [separator]="separator"
-                                          [placeholder]="('mydspace.results.no-uri' | translate)">
+                                          [placeholder]="('mydspace.results.no-identifier' | translate)">
+            </ds-item-detail-preview-field>
+            <ds-item-detail-preview-field [item]="item"
+                                          [object]="object"
+                                          [label]="('item.page.qualification' | translate)"
+                                          [metadata]="['dc.description.qualification', 'dc.degree']"
+                                          [separator]="separator"
+                                          [placeholder]="('mydspace.results.no-qualification' | translate)">
+            </ds-item-detail-preview-field>
+            <ds-item-detail-preview-field [item]="item"
+                                          [object]="object"
+                                          [label]="('item.page.collections' | translate)"
+                                          [metadata]="'dc.relation.haspart'"
+                                          [separator]="separator"
+                                          [placeholder]="('mydspace.results.no-collections' | translate)">
             </ds-item-detail-preview-field>
             <div>
               <ng-content></ng-content>

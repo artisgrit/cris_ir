@@ -24,19 +24,47 @@ export const copyWebpackOptions = {
           return path.join('assets', `${matches[1]}${fileHash}.json`);
         }
       },
-      transform(content) {
-        return JSON.stringify(JSON5.parse(content.toString()));
+      transform(content, absoluteFilename) {
+        try {
+          return JSON.stringify(JSON5.parse(content.toString()));
+        } catch (error) {
+          throw new Error(`Failed to parse JSON5 asset ${absoluteFilename}: ${error.message}`);
+        }
       }
     },
     {
       from: path.join(__dirname, '..', 'src', 'assets'),
       to: 'assets',
+      globOptions: {
+        ignore: ['**/*.json5'],
+      },
     },
     {
-      // replace(/\\/g, '/') because glob patterns need forward slashes, even on windows:
-      // https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-windows
+      from: path.join(__dirname, '..', 'src', 'themes', '*', 'assets', '**', '*.json5').replace(/\\/g, '/'),
+      noErrorOnMissing: true,
+      to({ absoluteFilename }) {
+        const matches = absoluteFilename.match(/.*[\/|\\]themes[\/|\\]([^\/|^\\]+)[\/|\\]assets[\/|\\](.+)\.json5$/);
+        if (matches) {
+          const themeName = matches[1];
+          const relativePath = matches[2];
+          const fileHash: string = process.env.NODE_ENV === 'production' ? `.${calculateFileHash(absoluteFilename)}` : '';
+          return path.join('assets', themeName, `${relativePath}${fileHash}.json`);
+        }
+      },
+      transform(content, absoluteFilename) {
+        try {
+          return JSON.stringify(JSON5.parse(content.toString()));
+        } catch (error) {
+          throw new Error(`Failed to parse JSON5 theme asset ${absoluteFilename}: ${error.message}`);
+        }
+      }
+    },
+    {
       from: path.join(__dirname, '..', 'src', 'themes', '*', 'assets', '**', '*').replace(/\\/g, '/'),
       noErrorOnMissing: true,
+      globOptions: {
+        ignore: ['**/*.json5'],
+      },
       to({ absoluteFilename }) {
         // use [\/|\\] to match both POSIX and Windows separators
         const matches = absoluteFilename.match(/.*[\/|\\]themes[\/|\\]([^\/|^\\]+)[\/|\\]assets[\/|\\](.+)$/);

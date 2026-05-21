@@ -7474,6 +7474,7 @@
 
   // "metric-badges.download": "<span class=\"fa fa-download\" title=\"Downloads\">&nbsp;</span>",
   "metric-badges.download": "<span class=\"fa fa-download\" title=\"Download\">&nbsp;</span>",
+  "metric-badges.altmetric": "<span class=\"fa fa-bullseye\" title=\"Altmetrics\">&nbsp;</span>",
 
 
   // "mydspace.breadcrumbs": "MyDSpace",

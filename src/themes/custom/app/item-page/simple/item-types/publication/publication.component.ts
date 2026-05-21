@@ -23,9 +23,11 @@ import { ThemedMetadataRepresentationListComponent } from '../../../../../../../
 import { RelatedItemsComponent } from '../../../../../../../app/item-page/simple/related-items/related-items-component';
 import { ContextMenuComponent } from '../../../../../../../app/shared/context-menu/context-menu.component';
 import { MetadataFieldWrapperComponent } from '../../../../../../../app/shared/metadata-field-wrapper/metadata-field-wrapper.component';
+import { ThemedBadgesComponent } from '../../../../../../../app/shared/object-collection/shared/badges/themed-badges.component';
 import { listableObjectComponent } from '../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../../../../app/shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
+import { ItemPageCcLicenseFieldComponent } from '../../../../../../../app/item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
 
 @listableObjectComponent('Publication', ViewMode.StandalonePage, Context.Any, 'custom')
 @Component({
@@ -51,7 +53,9 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
     ThemedFileSectionComponent,
     ThemedItemPageTitleFieldComponent,
     ThemedMediaViewerComponent,
+    ThemedBadgesComponent,
     ThemedMetadataRepresentationListComponent,
+    ItemPageCcLicenseFieldComponent,
     ThemedResultsBackButtonComponent,
     ThemedThumbnailComponent,
     TranslateModule,

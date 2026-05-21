@@ -149,6 +149,21 @@ export class AccessStatusBadgeComponent implements OnDestroy, OnInit {
       case 'open.access':
       case 'openaccess':
       case 'open':
+      case 'free.access':
+      case 'public.access':
+      case 'gold.open.access':
+      case 'green.open.access':
+      case 'hybrid.open.access':
+      case 'bronze.open.access':
+      case 'diamond.open.access':
+      case 'oa':
+      case 'published.version':
+      case 'publisher.version':
+      case 'version.of.record':
+      case 'accepted.manuscript':
+      case 'author.accepted.manuscript':
+      case 'preprint':
+      case 'postprint':
         return 'open.access';
       case 'restricted.access':
       case 'restrictedaccess':
@@ -162,7 +177,7 @@ export class AccessStatusBadgeComponent implements OnDestroy, OnInit {
       case 'embargo':
         return 'embargo';
       default:
-        return dottedStatus;
+        return 'unknown';
     }
   }
 }

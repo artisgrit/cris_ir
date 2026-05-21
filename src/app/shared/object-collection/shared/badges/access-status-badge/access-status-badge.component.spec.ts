@@ -31,6 +31,8 @@ describe('AccessStatusBadgeComponent', () => {
   let openAccessHyphenStatus: AccessStatusObject;
   let openAccessSpaceStatus: AccessStatusObject;
   let restrictedHyphenStatus: AccessStatusObject;
+  let greenOpenAccessStatus: AccessStatusObject;
+  let oaStatus: AccessStatusObject;
 
   let linkService;
 
@@ -56,6 +58,14 @@ describe('AccessStatusBadgeComponent', () => {
 
     openAccessSpaceStatus = Object.assign(new AccessStatusObject(), {
       status: 'open access',
+    });
+
+    greenOpenAccessStatus = Object.assign(new AccessStatusObject(), {
+      status: 'green open access',
+    });
+
+    oaStatus = Object.assign(new AccessStatusObject(), {
+      status: 'oa',
     });
 
     restrictedHyphenStatus = Object.assign(new AccessStatusObject(), {
@@ -249,6 +259,34 @@ describe('AccessStatusBadgeComponent', () => {
     beforeEach(waitForAsync(() => {
       init();
       item.accessStatus = createSuccessfulRemoteDataObject$(openAccessSpaceStatus);
+      initTestBed();
+    }));
+    beforeEach(() => {
+      initFixtureAndComponentWithItem();
+    });
+    it('should show the open access badge', () => {
+      lookForAccessStatusBadgeForItem('open.access');
+    });
+  });
+
+  describe('When the item accessStatus link returns green open access', () => {
+    beforeEach(waitForAsync(() => {
+      init();
+      item.accessStatus = createSuccessfulRemoteDataObject$(greenOpenAccessStatus);
+      initTestBed();
+    }));
+    beforeEach(() => {
+      initFixtureAndComponentWithItem();
+    });
+    it('should show the open access badge', () => {
+      lookForAccessStatusBadgeForItem('open.access');
+    });
+  });
+
+  describe('When the item accessStatus link returns oa', () => {
+    beforeEach(waitForAsync(() => {
+      init();
+      item.accessStatus = createSuccessfulRemoteDataObject$(oaStatus);
       initTestBed();
     }));
     beforeEach(() => {

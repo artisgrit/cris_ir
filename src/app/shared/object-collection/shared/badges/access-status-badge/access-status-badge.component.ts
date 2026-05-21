@@ -143,21 +143,26 @@ export class AccessStatusBadgeComponent implements OnDestroy, OnInit {
       return 'unknown';
     }
     const normalized = status.toLowerCase().trim();
-    switch (normalized) {
-      case 'open_access':
+    const primaryStatus = normalized.split(/[;,]/)[0].trim();
+    const dottedStatus = primaryStatus.replace(/[-_\s]+/g, '.');
+    switch (dottedStatus) {
+      case 'open.access':
       case 'openaccess':
       case 'open':
         return 'open.access';
-      case 'restricted_access':
+      case 'restricted.access':
       case 'restrictedaccess':
+      case 'restricted':
         return 'restricted';
-      case 'metadata_only':
+      case 'metadata.only':
       case 'metadataonly':
+      case 'metadata':
         return 'metadata.only';
       case 'embargoed':
+      case 'embargo':
         return 'embargo';
       default:
-        return normalized.replace(/_/g, '.');
+        return dottedStatus;
     }
   }
 }

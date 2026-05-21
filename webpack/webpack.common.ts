@@ -28,7 +28,8 @@ export const copyWebpackOptions = {
         try {
           return JSON.stringify(JSON5.parse(content.toString()));
         } catch (error) {
-          throw new Error(`Failed to parse JSON5 asset ${absoluteFilename}: ${error.message}`);
+          const message = error instanceof Error ? error.message : String(error);
+          throw new Error(`Failed to parse JSON5 asset ${absoluteFilename}: ${message}`);
         }
       }
     },
@@ -55,7 +56,8 @@ export const copyWebpackOptions = {
         try {
           return JSON.stringify(JSON5.parse(content.toString()));
         } catch (error) {
-          throw new Error(`Failed to parse JSON5 theme asset ${absoluteFilename}: ${error.message}`);
+          const message = error instanceof Error ? error.message : String(error);
+          throw new Error(`Failed to parse JSON5 theme asset ${absoluteFilename}: ${message}`);
         }
       }
     },

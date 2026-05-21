@@ -81,7 +81,9 @@ export class CountersSectionComponent implements OnInit {
       this.countersSection.counterSettingsList.map((counterSettings: CountersSettings) =>
         this.searchService.search(new PaginatedSearchOptions({
           configuration: counterSettings.discoveryConfigurationName,
-          pagination: this.pagination })).pipe(
+          pagination: this.pagination,
+          fixedFilter: counterSettings.fixedFilter ?? this.getDefaultFixedFilter(counterSettings.entityName),
+        })).pipe(
           getFirstSucceededRemoteDataPayload(),
           map((rs: SearchObjects<DSpaceObject>) => rs.totalElements),
           map((total: number) => {
@@ -96,9 +98,16 @@ export class CountersSectionComponent implements OnInit {
         )));
     this.counterData$.subscribe(() => this.isLoading$.next(false));
   }
+
+
+  private getDefaultFixedFilter(entityName: string): string | undefined {
+    if (entityName && entityName.toLowerCase().includes('dataset')) {
+      return 'f.entityType=Product,equals';
+    }
+
+    return undefined;
+  }
 }
-
-
 
 export interface CountersSection extends SectionComponent {
   componentType: 'counters';
@@ -110,6 +119,7 @@ export interface CountersSettings {
   entityName: string;
   icon: string;
   link: string;
+  fixedFilter?: string;
 }
 
 export interface CounterData {

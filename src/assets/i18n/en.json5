@@ -25,8 +25,6 @@
   "access-status.open.access.listelement.badge": "Open Access",
   "access-status.restricted.listelement.badge": "Restricted",
   "access-status.unknown.listelement.badge": "Unknown",
-<<<<<<< HEAD
-=======
 
   // --- OPEN ACCESS TYPES ---
   "access-status.free.access.listelement.badge": "Free Access",
@@ -199,7 +197,6 @@
   "access-status.single.blind.reviewed.listelement.badge": "Single-blind Reviewed",
   "access-status.open.peer.review.listelement.badge": "Open Peer Review",
 
->>>>>>> cddb8ae777e833581c23634c88ed212ed3c8ad50
   "admin.curation-tasks.breadcrumbs": "System curation tasks",
   "admin.curation-tasks.title": "System curation tasks",
   "admin.curation-tasks.header": "System curation tasks",

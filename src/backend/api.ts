@@ -46,6 +46,92 @@ function toHALResponse(req, data, included?) {
 
 export function createMockApi() {
 
+  // Helper: derive a simple access status for an item from available data
+  function deriveAccessStatus(item) {
+    try {
+      // 1. If any bitstream in any bundle has a public `url` or a `retrieve` link -> Open Access
+      if (item && item._embedded && Array.isArray(item._embedded.bundles)) {
+        for (const bundle of item._embedded.bundles) {
+          if (bundle && bundle._embedded && Array.isArray(bundle._embedded.bitstreams)) {
+            for (const bs of bundle._embedded.bitstreams) {
+              // bitstream may have a `url` or `retrieve` in its links
+              if (bs.url || (bs._links && bs._links.retrieve)) {
+                return 'open access';
+              }
+            }
+          }
+        }
+      }
+
+      // 2. Fall back to collection-level rights text: if it contains 'rights reserved' assume restricted
+      if (item && item._embedded && Array.isArray(item._embedded.parents)) {
+        for (const parent of item._embedded.parents) {
+          if (parent && Array.isArray(parent.metadata)) {
+            const rights = parent.metadata.find((m) => m.key === 'dc.rights');
+            if (rights && typeof rights.value === 'string') {
+              const txt = rights.value.toLowerCase();
+              if (txt.includes('all rights reserved') || txt.includes('rights reserved')) {
+                return 'restricted access';
+              }
+            }
+          }
+        }
+      }
+
+      // 3. Default to unknown
+      return 'unknown';
+    } catch (e) {
+      return 'unknown';
+    }
+  }
+
+  function ensureAccessMetadataOnItem(item) {
+    if (!item) return item;
+    const status = deriveAccessStatus(item);
+    if (!Array.isArray(item.metadata)) item.metadata = [];
+    const existingIndex = item.metadata.findIndex((m) => m.key === 'dc.rights.access');
+    const entry = { key: 'dc.rights.access', value: status, language: null };
+    if (existingIndex >= 0) {
+      item.metadata[existingIndex] = entry;
+    } else {
+      item.metadata.push(entry);
+    }
+    return item;
+  }
+
+  function ensureAccessStatusLinkOnItem(item) {
+    if (!item || !item._links) {
+      return item;
+    }
+    item._links.accessStatus = {
+      href: `/items/${item.id}/accessStatus`,
+    };
+    return item;
+  }
+
+  function enrichItem(item) {
+    if (!item) {
+      return item;
+    }
+    ensureAccessMetadataOnItem(item);
+    ensureAccessStatusLinkOnItem(item);
+    return item;
+  }
+
+  function createAccessStatusObject(item) {
+    const status = deriveAccessStatus(item);
+    return {
+      type: { value: 'accessStatus' },
+      status,
+      embargoDate: null,
+      _links: {
+        self: {
+          href: `/items/${item.id}/accessStatus`,
+        },
+      },
+    };
+  }
+
   const router = Router();
 
   router.route('/communities').get((req, res) => {
@@ -104,7 +190,16 @@ export function createMockApi() {
     console.log('GET');
     // 70ms latency
     setTimeout(() => {
-      res.json(toHALResponse(req, ITEMS));
+      // Do not mutate original ITEMS; create a deep copy and enrich metadata and HAL links
+      try {
+        const enriched = JSON.parse(JSON.stringify(ITEMS));
+        if (enriched && Array.isArray(enriched.items)) {
+          enriched.items = enriched.items.map((it) => enrichItem(it));
+        }
+        res.json(toHALResponse(req, enriched));
+      } catch (e) {
+        res.json(toHALResponse(req, ITEMS));
+      }
     }, 0);
   });
 
@@ -123,7 +218,22 @@ export function createMockApi() {
   });
 
   router.route('/items/:item_id').get((req, res) => {
-    res.json(toHALResponse(req, req.itemRD$));
+    try {
+      const itemCopy = JSON.parse(JSON.stringify(req.itemRD$));
+      enrichItem(itemCopy);
+      res.json(toHALResponse(req, itemCopy));
+    } catch (e) {
+      res.json(toHALResponse(req, req.itemRD$));
+    }
+  });
+
+  router.route('/items/:item_id/accessStatus').get((req, res) => {
+    const item = req.itemRD$;
+    if (!item) {
+      return res.status(404).json({ status: 404, message: 'Item not found' });
+    }
+    const accessStatus = createAccessStatusObject(item);
+    res.json(toHALResponse(req, accessStatus));
   });
 
   router.route('/bundles').get((req, res) => {

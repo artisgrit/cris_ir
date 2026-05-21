@@ -1,3 +1,202 @@
-span{
+span {
   white-space: normal;
+}
+
+/* === OPEN ACCESS — green === */
+.access-status-open-access-listelement-badge,
+.access-status-free-access-listelement-badge,
+.access-status-public-access-listelement-badge,
+.access-status-gold-open-access-listelement-badge,
+.access-status-green-open-access-listelement-badge,
+.access-status-diamond-open-access-listelement-badge,
+.access-status-oa-listelement-badge,
+.access-status-public-domain-listelement-badge,
+.access-status-cc0-listelement-badge {
+  background-color: #1a7a3c !important;
+  color: #ffffff !important;
+}
+
+/* === HYBRID / BRONZE OPEN ACCESS — teal === */
+.access-status-hybrid-open-access-listelement-badge,
+.access-status-bronze-open-access-listelement-badge {
+  background-color: #17a589 !important;
+  color: #ffffff !important;
+}
+
+/* === RESTRICTED / CLOSED — red === */
+.access-status-restricted-listelement-badge,
+.access-status-closed-access-listelement-badge,
+.access-status-paywalled-listelement-badge,
+.access-status-subscription-required-listelement-badge,
+.access-status-login-required-listelement-badge,
+.access-status-members-only-listelement-badge,
+.access-status-internal-use-only-listelement-badge,
+.access-status-staff-only-listelement-badge,
+.access-status-confidential-listelement-badge,
+.access-status-sensitive-content-listelement-badge {
+  background-color: #c0392b !important;
+  color: #ffffff !important;
+}
+
+/* === EMBARGO — orange === */
+.access-status-embargo-listelement-badge,
+.access-status-embargoed-until-listelement-badge {
+  background-color: #e67e22 !important;
+  color: #ffffff !important;
+}
+
+/* === CONTROLLED / LIMITED ACCESS — amber === */
+.access-status-institutional-access-only-listelement-badge,
+.access-status-campus-access-listelement-badge,
+.access-status-library-access-only-listelement-badge,
+.access-status-alumni-access-listelement-badge,
+.access-status-student-access-only-listelement-badge,
+.access-status-national-license-access-listelement-badge,
+.access-status-consortium-access-listelement-badge,
+.access-status-limited-access-listelement-badge,
+.access-status-temporary-access-listelement-badge,
+.access-status-trial-access-listelement-badge,
+.access-status-request-a-copy-listelement-badge,
+.access-status-on-site-access-only-listelement-badge,
+.access-status-offline-access-only-listelement-badge {
+  background-color: #d4891a !important;
+  color: #ffffff !important;
+}
+
+/* === METADATA ONLY — grey-blue === */
+.access-status-metadata-only-listelement-badge,
+.access-status-abstract-only-listelement-badge,
+.access-status-citation-only-listelement-badge {
+  background-color: #5d6d7e !important;
+  color: #ffffff !important;
+}
+
+/* === AVAILABLE / FULL TEXT — blue === */
+.access-status-full-text-listelement-badge,
+.access-status-download-available-listelement-badge,
+.access-status-preview-available-listelement-badge,
+.access-status-available-listelement-badge,
+.access-status-text-available-listelement-badge,
+.access-status-data-available-listelement-badge,
+.access-status-code-available-listelement-badge {
+  background-color: #2980b9 !important;
+  color: #ffffff !important;
+}
+
+/* === CREATIVE COMMONS / LICENCES — purple === */
+.access-status-creative-commons-listelement-badge,
+.access-status-cc-by-listelement-badge,
+.access-status-cc-by-sa-listelement-badge,
+.access-status-cc-by-nc-listelement-badge,
+.access-status-cc-by-nd-listelement-badge,
+.access-status-cc-by-nc-sa-listelement-badge,
+.access-status-cc-by-nc-nd-listelement-badge,
+.access-status-reusable-listelement-badge,
+.access-status-educational-use-permitted-listelement-badge {
+  background-color: #7d3c98 !important;
+  color: #ffffff !important;
+}
+
+/* === ALL RIGHTS RESERVED / COPYRIGHTED — dark === */
+.access-status-all-rights-reserved-listelement-badge,
+.access-status-copyrighted-listelement-badge,
+.access-status-commercial-use-restricted-listelement-badge,
+.access-status-non-commercial-use-only-listelement-badge,
+.access-status-patent-pending-listelement-badge {
+  background-color: #2c3e50 !important;
+  color: #ffffff !important;
+}
+
+/* === PUBLICATION VERSIONS — indigo === */
+.access-status-version-of-record-listelement-badge,
+.access-status-published-version-listelement-badge,
+.access-status-publisher-version-listelement-badge,
+.access-status-accepted-manuscript-listelement-badge,
+.access-status-author-accepted-manuscript-listelement-badge,
+.access-status-preprint-listelement-badge,
+.access-status-postprint-listelement-badge,
+.access-status-peer-reviewed-listelement-badge,
+.access-status-early-access-listelement-badge,
+.access-status-online-first-listelement-badge,
+.access-status-in-press-listelement-badge {
+  background-color: #1a5276 !important;
+  color: #ffffff !important;
+}
+
+/* === WORKFLOW / LIFECYCLE — slate === */
+.access-status-draft-listelement-badge,
+.access-status-submitted-listelement-badge,
+.access-status-under-review-listelement-badge,
+.access-status-accepted-listelement-badge {
+  background-color: #7f8c8d !important;
+  color: #ffffff !important;
+}
+
+/* === PUBLISHED / LIVE — dark green === */
+.access-status-published-listelement-badge,
+.access-status-archived-listelement-badge,
+.access-status-preserved-listelement-badge,
+.access-status-digitized-listelement-badge,
+.access-status-born-digital-listelement-badge {
+  background-color: #27ae60 !important;
+  color: #ffffff !important;
+}
+
+/* === RETRACTED / WITHDRAWN — dark red === */
+.access-status-retracted-listelement-badge,
+.access-status-withdrawn-listelement-badge,
+.access-status-removed-listelement-badge,
+.access-status-deleted-listelement-badge,
+.access-status-expression-of-concern-listelement-badge {
+  background-color: #922b21 !important;
+  color: #ffffff !important;
+}
+
+/* === CORRECTIONS — muted orange === */
+.access-status-corrected-version-listelement-badge,
+.access-status-updated-version-listelement-badge,
+.access-status-erratum-listelement-badge,
+.access-status-corrigendum-listelement-badge,
+.access-status-superseded-listelement-badge,
+.access-status-deprecated-listelement-badge,
+.access-status-retired-listelement-badge {
+  background-color: #a04000 !important;
+  color: #ffffff !important;
+}
+
+/* === INDEXING / DISCOVERY — cyan === */
+.access-status-doi-available-listelement-badge,
+.access-status-orcid-linked-listelement-badge,
+.access-status-scopus-indexed-listelement-badge,
+.access-status-web-of-science-indexed-listelement-badge,
+.access-status-pubmed-indexed-listelement-badge,
+.access-status-fair-data-listelement-badge,
+.access-status-reproducible-research-listelement-badge {
+  background-color: #0e6655 !important;
+  color: #ffffff !important;
+}
+
+/* === FEATURED / CURATED — gold === */
+.access-status-featured-listelement-badge,
+.access-status-trending-listelement-badge,
+.access-status-highly-cited-listelement-badge,
+.access-status-recommended-listelement-badge,
+.access-status-verified-listelement-badge,
+.access-status-curated-listelement-badge {
+  background-color: #b7950b !important;
+  color: #ffffff !important;
+}
+
+/* === FUNDING — deep blue === */
+.access-status-apc-funded-listelement-badge,
+.access-status-sponsor-funded-listelement-badge,
+.access-status-grant-funded-listelement-badge {
+  background-color: #1f618d !important;
+  color: #ffffff !important;
+}
+
+/* === UNKNOWN fallback === */
+.access-status-unknown-listelement-badge {
+  background-color: #6c757d !important;
+  color: #ffffff !important;
 }

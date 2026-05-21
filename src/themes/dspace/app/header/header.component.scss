@@ -215,6 +215,11 @@
         gap: clamp(0.75rem, 2vw, 1.25rem) !important;
         align-items: center !important;
 
+        @include media-breakpoint-between(md, xl) {
+          transform: scale(1.02);
+          transform-origin: left center;
+        }
+
         @include media-breakpoint-up(md) {
           margin-left: 75px !important;
         }

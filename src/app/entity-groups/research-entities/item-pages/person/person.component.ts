@@ -76,61 +76,61 @@ export class PersonComponent extends ItemComponent {
       catchError(() => of(null)),
     ) ?? of(null);
 
-    return itemThumbnail$.pipe(
-      switchMap((itemThumbnail: Bitstream) => {
-        if (itemThumbnail) {
-          return of(itemThumbnail);
+    const options = Object.assign(new FindListOptions(), { elementsPerPage: 1, currentPage: 1 });
+    const originalImage$ = this.bitstreamDataService.showableByItem(
+      this.object.uuid,
+      'ORIGINAL',
+      [],
+      options,
+      true,
+      true,
+      followLink('thumbnail', { isOptional: true }),
+      followLink('format', { isOptional: true }),
+    ).pipe(
+      getFirstCompletedRemoteData(),
+      getRemoteDataPayload(),
+      getPaginatedListPayload(),
+      map((page: Bitstream[]) => page?.[0] ?? null),
+      switchMap((original: Bitstream) => {
+        if (!original) {
+          return of(null);
         }
 
-        const options = Object.assign(new FindListOptions(), { elementsPerPage: 1, currentPage: 1 });
-        return this.bitstreamDataService.showableByItem(
-          this.object.uuid,
-          'ORIGINAL',
-          [],
-          options,
-          true,
-          true,
-          followLink('thumbnail', { isOptional: true }),
-          followLink('format', { isOptional: true }),
-        ).pipe(
+        const derivedThumb$ = original.thumbnail?.pipe(
           getFirstCompletedRemoteData(),
           getRemoteDataPayload(),
-          getPaginatedListPayload(),
-          map((page: Bitstream[]) => page?.[0] ?? null),
-          switchMap((original: Bitstream) => {
-            if (!original) {
-              return of(null);
+          take(1),
+          catchError(() => of(null)),
+        ) ?? of(null);
+
+        return original.format?.pipe(
+          getFirstCompletedRemoteData(),
+          map((formatRD) => formatRD?.payload as BitstreamFormat),
+          switchMap((format: BitstreamFormat) => {
+            const isImage = (format?.mimetype ?? '').toLowerCase().startsWith('image/');
+            if (isImage) {
+              return of(original);
             }
-
-            return original.format?.pipe(
-              getFirstCompletedRemoteData(),
-              map((formatRD) => formatRD?.payload as BitstreamFormat),
-              map((format: BitstreamFormat) => (format?.mimetype ?? '').toLowerCase().startsWith('image/')),
-              switchMap((isImage) => {
-                if (!isImage) {
-                  return of(null);
-                }
-
-                const derivedThumb$ = original.thumbnail?.pipe(
-                  getFirstCompletedRemoteData(),
-                  getRemoteDataPayload(),
-                  take(1),
-                  catchError(() => of(null)),
-                ) ?? of(null);
-
-                return derivedThumb$.pipe(
-                  map((derived) => derived ?? original),
-                );
-              }),
-              take(1),
-              catchError(() => of(null)),
-            ) ?? of(null);
+            return derivedThumb$.pipe(
+              map((derived) => derived ?? null),
+            );
           }),
           take(1),
           catchError(() => of(null)),
-        );
+        ) ?? derivedThumb$;
       }),
+      take(1),
       catchError(() => of(null)),
+    );
+
+    return originalImage$.pipe(
+      switchMap((originalImage: Bitstream) => {
+        if (originalImage) {
+          return of(originalImage);
+        }
+        return itemThumbnail$;
+      }),
+      catchError(() => itemThumbnail$),
     );
   }
 }

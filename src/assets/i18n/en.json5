@@ -220,7 +220,7 @@
   "access-status.editor.reviewed.listelement.badge": "Editor Reviewed",
   "access-status.double.blind.reviewed.listelement.badge": "Double-blind Reviewed",
   "access-status.single.blind.reviewed.listelement.badge": "Single-blind Reviewed",
-  "access-status.open.peer.review.listelement.badge": "Open Peer Review"
+  "access-status.open.peer.review.listelement.badge": "Open Peer Review",
 
   "admin.curation-tasks.breadcrumbs": "System curation tasks",
 

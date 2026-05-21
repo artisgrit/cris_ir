@@ -28,6 +28,9 @@ describe('AccessStatusBadgeComponent', () => {
   let openAccessStatus: AccessStatusObject;
   let embargoStatus: AccessStatusObject;
   let restrictedStatus: AccessStatusObject;
+  let openAccessHyphenStatus: AccessStatusObject;
+  let openAccessSpaceStatus: AccessStatusObject;
+  let restrictedHyphenStatus: AccessStatusObject;
 
   let linkService;
 
@@ -45,6 +48,18 @@ describe('AccessStatusBadgeComponent', () => {
 
     openAccessStatus = Object.assign(new AccessStatusObject(), {
       status: 'open.access',
+    });
+
+    openAccessHyphenStatus = Object.assign(new AccessStatusObject(), {
+      status: 'open-access',
+    });
+
+    openAccessSpaceStatus = Object.assign(new AccessStatusObject(), {
+      status: 'open access',
+    });
+
+    restrictedHyphenStatus = Object.assign(new AccessStatusObject(), {
+      status: 'restricted-access',
     });
 
     embargoStatus = Object.assign(new AccessStatusObject(), {
@@ -206,6 +221,48 @@ describe('AccessStatusBadgeComponent', () => {
     beforeEach(waitForAsync(() => {
       init();
       item.accessStatus = createSuccessfulRemoteDataObject$(restrictedStatus);
+      initTestBed();
+    }));
+    beforeEach(() => {
+      initFixtureAndComponentWithItem();
+    });
+    it('should show the restricted badge', () => {
+      lookForAccessStatusBadgeForItem('restricted');
+    });
+  });
+
+  describe('When the item accessStatus link returns open-access with hyphen', () => {
+    beforeEach(waitForAsync(() => {
+      init();
+      item.accessStatus = createSuccessfulRemoteDataObject$(openAccessHyphenStatus);
+      initTestBed();
+    }));
+    beforeEach(() => {
+      initFixtureAndComponentWithItem();
+    });
+    it('should show the open access badge', () => {
+      lookForAccessStatusBadgeForItem('open.access');
+    });
+  });
+
+  describe('When the item accessStatus link returns open access with space', () => {
+    beforeEach(waitForAsync(() => {
+      init();
+      item.accessStatus = createSuccessfulRemoteDataObject$(openAccessSpaceStatus);
+      initTestBed();
+    }));
+    beforeEach(() => {
+      initFixtureAndComponentWithItem();
+    });
+    it('should show the open access badge', () => {
+      lookForAccessStatusBadgeForItem('open.access');
+    });
+  });
+
+  describe('When the item accessStatus link returns restricted-access with hyphen', () => {
+    beforeEach(waitForAsync(() => {
+      init();
+      item.accessStatus = createSuccessfulRemoteDataObject$(restrictedHyphenStatus);
       initTestBed();
     }));
     beforeEach(() => {
